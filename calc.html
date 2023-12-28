@@ -184,6 +184,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://unpkg.com/jspdf-autotable@3.8.1/dist/jspdf.plugin.autotable.js"></script>
     <script>
+        // Load saved input states when the page is loaded
+        window.onload = function() {
+            var inputs = document.getElementsByTagName('input');
+            for (var i = 0; i < inputs.length; i++) {
+                var savedInput = sessionStorage.getItem(inputs[i].id);
+                if (savedInput) {
+                    inputs[i].value = savedInput;
+                }
+            }
+            calculateTotalIngredients();
+        }
+
+        // Save input states when any input value changes
+        window.oninput = function(e) {
+            var input = e.target;
+            sessionStorage.setItem(input.id, input.value);
+        }
+
         // JavaScript code to calculate all ingredients
 
         // Get all input elements
