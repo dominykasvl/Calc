@@ -1,0 +1,1 @@
+create a calculator that would measure total ingredients for each product seperately and at the end - sum of all total. Use pure html, css, javascript only. Products in question are "bread, muffin, cake". Measurements are in grams. Allow to expand list later. Use measurements templates that I later will change.

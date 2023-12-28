@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ingredient Calculator</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>Ingredient Calculator</h1>
+
+    <h2>Bread</h2>
+    <label for="bread-quantity">Quantity:</label>
+    <input type="number" id="bread-quantity" />
+
+    <h2>Muffins</h2>
+    <label for="muffin-quantity">Quantity:</label>
+    <input type="number" id="muffin-quantity" />
+
+    <h2>Cake</h2>
+    <label for="cake-quantity">Quantity:</label>
+    <input type="number" id="cake-quantity" />
+
+    <h2>Total Ingredients</h2>
+    <p id="total-ingredients">Total: 0 grams</p>
+
+    <h2>Report</h2>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Bread Flour</th>
+            <th>Yeast</th>
+            <th>All-Purpose Flour</th>
+            <th>Baking Powder</th>
+            <th>Cake Flour</th>
+            <th>Sugar</th>
+            <th>Total Ingredients</th>
+        </tr>
+        <tr>
+            <td>Bread</td>
+            <td id="bread-flour-total">0 grams</td>
+            <td id="yeast-total">0 grams</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td id="bread-total">0 grams</td>
+        </tr>
+        <tr>
+            <td>Muffins</td>
+            <td></td>
+            <td></td>
+            <td id="all-purpose-flour-total">0 grams</td>
+            <td id="baking-powder-total">0 grams</td>
+            <td></td>
+            <td></td>
+            <td id="muffin-total">0 grams</td>
+        </tr>
+        <tr>
+            <td>Cake</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td id="cake-flour-total">0 grams</td>
+            <td id="sugar-total">0 grams</td>
+            <td id="cake-total">0 grams</td>
+        </tr>
+        <tr>
+            <td>All Products</td>
+            <td id="all-bread-flour-total">0 grams</td>
+            <td id="all-yeast-total">0 grams</td>
+            <td id="all-all-purpose-flour-total">0 grams</td>
+            <td id="all-baking-powder-total">0 grams</td>
+            <td id="all-cake-flour-total">0 grams</td>
+            <td id="all-sugar-total">0 grams</td>
+            <td id="all-products-total">0 grams</td>
+        </tr>
+    </table>
+
+    <button id="generate-pdf">Generate PDF</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/jspdf-autotable@3.8.1/dist/jspdf.plugin.autotable.js"></script>
+    <script>
+        // JavaScript code to calculate all ingredients
+
+        // Get all input elements
+        const breadQuantityInput = document.getElementById('bread-quantity');
+        const muffinQuantityInput = document.getElementById('muffin-quantity');
+        const cakeQuantityInput = document.getElementById('cake-quantity');
+
+        // Calculate all ingredients
+        function calculateTotalIngredients() {
+            const breadQuantity = parseInt(breadQuantityInput.value) || 0;
+            const muffinQuantity = parseInt(muffinQuantityInput.value) || 0;
+            const cakeQuantity = parseInt(cakeQuantityInput.value) || 0;
+
+            const breadFlour = breadQuantity * 100; // Example value, replace with actual value
+            const yeast = breadQuantity * 5; // Example value, replace with actual value
+            const allPurposeFlour = muffinQuantity * 150; // Example value, replace with actual value
+            const bakingPowder = muffinQuantity * 10; // Example value, replace with actual value
+            const cakeFlour = cakeQuantity * 200; // Example value, replace with actual value
+            const sugar = cakeQuantity * 50; // Example value, replace with actual value
+
+            const totalIngredients = breadFlour + yeast + allPurposeFlour + bakingPowder + cakeFlour + sugar;
+
+            document.getElementById('total-ingredients').textContent = `Total: ${totalIngredients} grams`;
+
+            // Calculate all ingredients for each product
+            const breadTotal = breadFlour + yeast;
+            const muffinTotal = allPurposeFlour + bakingPowder;
+            const cakeTotal = cakeFlour + sugar;
+
+            document.getElementById('bread-flour-total').textContent = `${breadFlour} grams`;
+            document.getElementById('yeast-total').textContent = `${yeast} grams`;
+            document.getElementById('all-purpose-flour-total').textContent = `${allPurposeFlour} grams`;
+            document.getElementById('baking-powder-total').textContent = `${bakingPowder} grams`;
+            document.getElementById('cake-flour-total').textContent = `${cakeFlour} grams`;
+            document.getElementById('sugar-total').textContent = `${sugar} grams`;
+
+            document.getElementById('bread-total').textContent = `${breadTotal} grams`;
+            document.getElementById('muffin-total').textContent = `${muffinTotal} grams`;
+            document.getElementById('cake-total').textContent = `${cakeTotal} grams`;
+
+            // Calculate all ingredients for all products
+            const allBreadFlourTotal = breadFlour;
+            const allYeastTotal = yeast;
+            const allAllPurposeFlourTotal = allPurposeFlour;
+            const allBakingPowderTotal = bakingPowder;
+            const allCakeFlourTotal = cakeFlour;
+            const allSugarTotal = sugar;
+
+            const allProductsTotal = allBreadFlourTotal + allYeastTotal + allAllPurposeFlourTotal + allBakingPowderTotal + allCakeFlourTotal + allSugarTotal;
+
+            document.getElementById('all-bread-flour-total').textContent = `${allBreadFlourTotal} grams`;
+            document.getElementById('all-yeast-total').textContent = `${allYeastTotal} grams`;
+            document.getElementById('all-all-purpose-flour-total').textContent = `${allAllPurposeFlourTotal} grams`;
+            document.getElementById('all-baking-powder-total').textContent = `${allBakingPowderTotal} grams`;
+            document.getElementById('all-cake-flour-total').textContent = `${allCakeFlourTotal} grams`;
+            document.getElementById('all-sugar-total').textContent = `${allSugarTotal} grams`;
+            document.getElementById('all-products-total').textContent = `${allProductsTotal} grams`;
+        }
+
+        // Add event listeners to calculate all ingredients when input values change
+        breadQuantityInput.addEventListener('input', calculateTotalIngredients);
+        muffinQuantityInput.addEventListener('input', calculateTotalIngredients);
+        cakeQuantityInput.addEventListener('input', calculateTotalIngredients);
+
+        // Generate PDF button click event handler
+        const generatePdfButton = document.getElementById('generate-pdf');
+        generatePdfButton.addEventListener('click', function() {
+            const doc = new window.jspdf.jsPDF();
+            const reportTable = document.querySelector('table');
+            doc.autoTable({ html: reportTable });
+            doc.save('report.pdf');
+        });
+    </script>
+</body>
+</html>
