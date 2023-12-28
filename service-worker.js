@@ -11,7 +11,12 @@ self.addEventListener('install', function (event) {
         caches.open(CACHE_NAME)
             .then(function (cache) {
                 console.log('Opened cache');
-                return cache.addAll(urlsToCache);
+                var cachePromises = urlsToCache.map(function(urlToCache) {
+                    return cache.add(urlToCache).catch(function(reason) {
+                        console.log(`Failed to cache ${urlToCache}: ${String(reason)}`);
+                    });
+                });
+                return Promise.all(cachePromises);
             })
     );
 });
