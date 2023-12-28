@@ -91,6 +91,70 @@
         </tr>
     </table>
 
+    <h2>Bread</h2>
+    <table>
+        <caption>Ingredients for Bread</caption>
+        <tr>
+            <th>Ingredients</th>
+            <th>Quantity in grams</th>
+        </tr>
+        <tr>
+            <td>Yeast</td>
+            <td id="bread-yeast-total">0 grams</td>
+        </tr>
+        <tr>
+            <td>All-Purpose Flour</td>
+            <td id="bread-all-purpose-flour-total">0 grams</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td id="all-bread-products-total">0 grams</td>
+        </tr>
+    </table>
+
+    <h2>Muffins</h2>
+    <table>
+        <caption>Ingredients for Muffins</caption>
+        <tr>
+            <th>Ingredients</th>
+            <th>Quantity in grams</th>
+        </tr>
+        <tr>
+            <td>All-Purpose Flour</td>
+            <td id="muffin-all-purpose-flour-total">0 grams</td>
+        </tr>
+        <tr>
+            <td>Baking Powder</td>
+            <td id="muffin-baking-powder-total">0 grams</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td id="all-muffin-products-total">0 grams</td>
+        </tr>
+    </table>
+
+    <h2>Cake</h2>
+    <table>
+        <caption>Ingredients for Cake</caption>
+        <tr>
+            <th>Ingredients</th>
+            <th>Quantity in grams</th>
+        </tr>
+        <tr>
+            <td>Cake Flour</td>
+            <td id="cake-cake-flour-total">0 grams</td>
+        </tr>
+        <tr>
+            <td>Sugar</td>
+            <td id="cake-sugar-total">0 grams</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td id="all-cake-products-total">0 grams</td>
+        </tr>
+    </table>
+
+    <br />
     <button id="generate-pdf">Generate PDF</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -153,6 +217,36 @@
             document.getElementById('all-cake-flour-total').textContent = `${allCakeFlourTotal} grams`;
             document.getElementById('all-sugar-total').textContent = `${allSugarTotal} grams`;
             document.getElementById('all-products-total').textContent = `${allProductsTotal} grams`;
+
+            // Calculate ingredients for bread table
+            const breadYeastTotal = yeast;
+            const breadAllPurposeFlourTotal = breadFlour;
+
+            const allBreadProductsTotal = breadYeastTotal + breadAllPurposeFlourTotal;
+
+            document.getElementById('bread-yeast-total').textContent = `${breadYeastTotal} grams`;
+            document.getElementById('bread-all-purpose-flour-total').textContent = `${breadAllPurposeFlourTotal} grams`;
+            document.getElementById('all-bread-products-total').textContent = `${allBreadProductsTotal} grams`;
+
+            // Calculate ingredients for muffin table
+            const muffinAllPurposeFlourTotal = allPurposeFlour;
+            const muffinBakingPowderTotal = bakingPowder;
+
+            const allMuffinProductsTotal = muffinAllPurposeFlourTotal + muffinBakingPowderTotal;
+
+            document.getElementById('muffin-all-purpose-flour-total').textContent = `${muffinAllPurposeFlourTotal} grams`;
+            document.getElementById('muffin-baking-powder-total').textContent = `${muffinBakingPowderTotal} grams`;
+            document.getElementById('all-muffin-products-total').textContent = `${allMuffinProductsTotal} grams`;
+
+            // Calculate ingredients for cake table
+            const cakeCakeFlourTotal = cakeFlour;
+            const cakeSugarTotal = sugar;
+
+            const allCakeProductsTotal = cakeCakeFlourTotal + cakeSugarTotal;
+
+            document.getElementById('cake-cake-flour-total').textContent = `${cakeCakeFlourTotal} grams`;
+            document.getElementById('cake-sugar-total').textContent = `${cakeSugarTotal} grams`;
+            document.getElementById('all-cake-products-total').textContent = `${allCakeProductsTotal} grams`;
         }
 
         // Add event listeners to calculate all ingredients when input values change
@@ -163,11 +257,21 @@
         // Generate PDF button click event handler
         const generatePdfButton = document.getElementById('generate-pdf');
         generatePdfButton.addEventListener('click', function() {
-            const doc = new window.jspdf.jsPDF();
-            const reportTable = document.querySelector('table');
-            doc.autoTable({ html: reportTable });
-            doc.save('report.pdf');
+        const doc = new window.jspdf.jsPDF();
+        const reportTables = document.querySelectorAll('table');
+        let startY = 10; // Initial Y position
+        reportTables.forEach(function(table, index) {
+            const captionElement = table.querySelector('caption');
+            if (captionElement) {
+                const caption = captionElement.textContent;
+                doc.text(caption, 10, startY);
+                doc.autoTable({ html: table, startY: startY + 10 });
+                // Update startY to the Y position where the last table ended + some margin
+                startY = doc.autoTable.previous.finalY + 20;
+            }
         });
+        doc.save('report.pdf');
+    });
     </script>
 </body>
 </html>
