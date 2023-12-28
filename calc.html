@@ -184,6 +184,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://unpkg.com/jspdf-autotable@3.8.1/dist/jspdf.plugin.autotable.js"></script>
     <script>
+        if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/Calc/service-worker.js').then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+        }
+        
         // Load saved input states when the page is loaded
         window.onload = function() {
             var inputs = document.getElementsByTagName('input');
