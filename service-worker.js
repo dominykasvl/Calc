@@ -1,7 +1,6 @@
-var CACHE_NAME = 'my-cache-v3'; // Update the cache name for the new version
+var CACHE_NAME = 'my-cache-v4'; // Update the cache name for the new version
 var urlsToCache = [
-    '/Calc',
-    '/Calc/calc.html',
+    //'/Calc/calc.html',
     '/Calc/myfont.ttf',
     'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
     'https://unpkg.com/jspdf-autotable@3.8.1/dist/jspdf.plugin.autotable.js'
