@@ -1,7 +1,8 @@
-var CACHE_NAME = 'my-cache';
+var CACHE_NAME = 'my-cache-v2'; // Update the cache name for the new version
 var urlsToCache = [
     '/Calc',
     '/Calc/calc.html',
+    '/Calc/myfont.ttf',
     'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
     'https://unpkg.com/jspdf-autotable@3.8.1/dist/jspdf.plugin.autotable.js'
 ];
@@ -18,6 +19,21 @@ self.addEventListener('install', function (event) {
                 });
                 return Promise.all(cachePromises);
             })
+    );
+});
+
+self.addEventListener('activate', function(event) {
+    event.waitUntil(
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(
+                cacheNames.map(function(cacheName) {
+                    if (cacheName !== CACHE_NAME) {
+                        console.log('Deleting out of date cache:', cacheName);
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
+        })
     );
 });
 

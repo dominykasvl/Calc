@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Ingredient Calculator</title>
     <style>
@@ -8,7 +9,8 @@
             width: 100%;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
@@ -43,159 +45,174 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Ingredient Calculator</h1>
 
-    <h2>Bread</h2>
-    <label for="bread-quantity">Quantity:</label>
-    <input type="number" id="bread-quantity" />
-
-    <h2>Muffins</h2>
-    <label for="muffin-quantity">Quantity:</label>
-    <input type="number" id="muffin-quantity" />
-
-    <h2>Cake</h2>
-    <label for="cake-quantity">Quantity:</label>
-    <input type="number" id="cake-quantity" />
-
-    <h2>Total Ingredients</h2>
-    <p id="total-ingredients">Total: 0 grams</p>
-
-    <h2>Report</h2>
-    <table>
-        <tr>
-            <th>Product</th>
-            <th>Bread Flour</th>
-            <th>Yeast</th>
-            <th>All-Purpose Flour</th>
-            <th>Baking Powder</th>
-            <th>Cake Flour</th>
-            <th>Sugar</th>
-            <th>Total Ingredients</th>
-        </tr>
-        <tr>
-            <td>Bread</td>
-            <td id="bread-flour-total">0 grams</td>
-            <td id="yeast-total">0 grams</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td id="bread-total">0 grams</td>
-        </tr>
-        <tr>
-            <td>Muffins</td>
-            <td></td>
-            <td></td>
-            <td id="all-purpose-flour-total">0 grams</td>
-            <td id="baking-powder-total">0 grams</td>
-            <td></td>
-            <td></td>
-            <td id="muffin-total">0 grams</td>
-        </tr>
-        <tr>
-            <td>Cake</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td id="cake-flour-total">0 grams</td>
-            <td id="sugar-total">0 grams</td>
-            <td id="cake-total">0 grams</td>
-        </tr>
-        <tr>
-            <td>All Products</td>
-            <td id="all-bread-flour-total">0 grams</td>
-            <td id="all-yeast-total">0 grams</td>
-            <td id="all-all-purpose-flour-total">0 grams</td>
-            <td id="all-baking-powder-total">0 grams</td>
-            <td id="all-cake-flour-total">0 grams</td>
-            <td id="all-sugar-total">0 grams</td>
-            <td id="all-products-total">0 grams</td>
-        </tr>
-    </table>
-
-    <h2>Bread</h2>
-    <table>
-        <caption>Ingredients for Bread</caption>
-        <tr>
-            <th>Ingredients</th>
-            <th>Quantity in grams</th>
-        </tr>
-        <tr>
-            <td>Yeast</td>
-            <td id="bread-yeast-total">0 grams</td>
-        </tr>
-        <tr>
-            <td>All-Purpose Flour</td>
-            <td id="bread-all-purpose-flour-total">0 grams</td>
-        </tr>
-        <tr>
-            <td>Total</td>
-            <td id="all-bread-products-total">0 grams</td>
-        </tr>
-    </table>
-
-    <h2>Muffins</h2>
-    <table>
-        <caption>Ingredients for Muffins</caption>
-        <tr>
-            <th>Ingredients</th>
-            <th>Quantity in grams</th>
-        </tr>
-        <tr>
-            <td>All-Purpose Flour</td>
-            <td id="muffin-all-purpose-flour-total">0 grams</td>
-        </tr>
-        <tr>
-            <td>Baking Powder</td>
-            <td id="muffin-baking-powder-total">0 grams</td>
-        </tr>
-        <tr>
-            <td>Total</td>
-            <td id="all-muffin-products-total">0 grams</td>
-        </tr>
-    </table>
-
-    <h2>Cake</h2>
-    <table>
-        <caption>Ingredients for Cake</caption>
-        <tr>
-            <th>Ingredients</th>
-            <th>Quantity in grams</th>
-        </tr>
-        <tr>
-            <td>Cake Flour</td>
-            <td id="cake-cake-flour-total">0 grams</td>
-        </tr>
-        <tr>
-            <td>Sugar</td>
-            <td id="cake-sugar-total">0 grams</td>
-        </tr>
-        <tr>
-            <td>Total</td>
-            <td id="all-cake-products-total">0 grams</td>
-        </tr>
-    </table>
-
-    <br />
     <button id="generate-pdf">Generate PDF</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://unpkg.com/jspdf-autotable@3.8.1/dist/jspdf.plugin.autotable.js"></script>
     <script>
-        if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/Calc/service-worker.js').then(function(registration) {
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            }, function(err) {
-            console.log('ServiceWorker registration failed: ', err);
+        // Define your products and their ingredients
+        const products = [
+            {
+                name: 'Klasikinė Duona',
+                category: 'Duona',
+                ingredients: [
+                    { name: 'мука', multiplier: 358 },
+                    { name: 'закваска', multiplier: 145 },
+                    { name: 'вода', multiplier: 220 },
+                    { name: 'соль', multiplier: 8.5 }
+                ]
+            },
+            {
+                name: 'Bread with Chocolate',
+                category: 'Bread',
+                ingredients: [
+                    { name: 'Bread Flour', multiplier: 100 },
+                    { name: 'Yeast', multiplier: 5 },
+                    { name: 'Chocolate', multiplier: 10 }
+                ]
+            },
+            // Other products...
+        ];
+
+        // Function to generate HTML for a product
+        function generateProductHTML(product) {
+            let html = `<h3>${product.name}</h3>
+    <label for="${product.name.toLowerCase().replace(' ', '-')}-quantity">Quantity:</label>
+    <input type="number" id="${product.name.toLowerCase().replace(' ', '-')}-quantity" />`;
+
+            return html;
+        }
+
+        // Function to generate HTML for a product's ingredients
+        function generateProductIngredientsHTML(product) {
+            let html = `<h3>Ingredients for ${product.name}</h3>
+<table>
+    <caption style="display: none;">Ingredients for ${product.name}</caption>
+    <tr>
+        <th>Ingredients</th>
+        <th>Multiplier</th>
+        <th>Quantity in grams</th>
+    </tr>`;
+
+            product.ingredients.forEach(ingredient => {
+                html += `<tr>
+    <td>${ingredient.name}</td>
+    <td><input type="number" id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-multiplier" value="${ingredient.multiplier}" /></td>
+    <td id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total">0 grams</td>
+</tr>`;
+            });
+
+            html += `<tr>
+    <td>Total</td>
+    <td></td>
+    <td id="all-${product.name.toLowerCase().replace(' ', '-')}-products-total">0 grams</td>
+</tr>
+</table>`;
+
+            return html;
+        }
+
+        // Generate the HTML for all products and add it to the page
+        let allProductsHTML = '';
+        let allProductsIngredientsHTML = '';
+        let currentCategory = '';
+        products.forEach(product => {
+            if (product.category !== currentCategory) {
+                currentCategory = product.category;
+                allProductsHTML += `<h2>${currentCategory}</h2>`;
+                allProductsIngredientsHTML += `<h2>${currentCategory}</h2>`;
+            }
+            allProductsHTML += generateProductHTML(product);
+            allProductsIngredientsHTML += generateProductIngredientsHTML(product);
+        });
+        document.body.innerHTML += allProductsHTML + allProductsIngredientsHTML;
+
+        // JavaScript code to calculate all ingredients
+
+        // Calculate all ingredients
+        function calculateTotalIngredients() {
+            let totalIngredients = 0;
+
+            products.forEach(product => {
+                const quantityInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-quantity`);
+                const quantity = parseFloat(quantityInput.value) || 0;
+
+                let productTotal = 0;
+
+                product.ingredients.forEach(ingredient => {
+                    const multiplierInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-multiplier`);
+                    const multiplier = parseFloat(multiplierInput.value) || ingredient.multiplier;
+                    const total = quantity * multiplier;
+                    productTotal += total;
+                    totalIngredients += total;
+
+                    document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total`).textContent = `${total.toFixed(2)} grams`;
+                });
+
+                document.getElementById(`all-${product.name.toLowerCase().replace(' ', '-')}-products-total`).textContent = `${productTotal.toFixed(2)} grams`;
+            });
+        }
+
+        // Add event listeners to calculate all ingredients when input values change
+        products.forEach(product => {
+            const quantityInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-quantity`);
+            quantityInput.addEventListener('input', calculateTotalIngredients);
+
+            product.ingredients.forEach(ingredient => {
+                const multiplierInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-multiplier`);
+                multiplierInput.addEventListener('input', calculateTotalIngredients);
             });
         });
+        // Generate PDF button click event handler
+        const generatePdfButton = document.getElementById('generate-pdf');
+        generatePdfButton.addEventListener('click', async function () {
+            const doc = new window.jspdf.jsPDF();
+
+            const response = await fetch('/Calc/myfont.ttf');
+            const blob = await response.blob();
+            const myFont = await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsBinaryString(blob);
+            });
+
+            // add the font to jsPDF
+            doc.addFileToVFS("myfont.ttf", myFont);
+            doc.addFont("myfont.ttf", "myfont", "normal");
+            doc.setFont("myfont");
+
+            const reportTables = document.querySelectorAll('table');
+            let startY = 10; // Initial Y position
+            reportTables.forEach(function (table, index) {
+                const captionElement = table.querySelector('caption');
+                if (captionElement) {
+                    const caption = captionElement.textContent;
+                    doc.text(caption, 10, startY);
+                    doc.autoTable({ html: table, startY: startY + 10, styles: { font: "myfont" } });
+                    // Update startY to the Y position where the last table ended + some margin
+                    startY = doc.autoTable.previous.finalY + 20;
+                }
+            });
+            doc.save('report.pdf');
+        });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/Calc/service-worker.js').then(function (registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function (err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
         }
-        
+
         // Load saved input states when the page is loaded
-        window.onload = function() {
+        window.onload = function () {
             var inputs = document.getElementsByTagName('input');
             for (var i = 0; i < inputs.length; i++) {
                 var savedInput = sessionStorage.getItem(inputs[i].id);
@@ -207,123 +224,12 @@
         }
 
         // Save input states when any input value changes
-        window.oninput = function(e) {
+        window.oninput = function (e) {
             var input = e.target;
             sessionStorage.setItem(input.id, input.value);
         }
 
-        // JavaScript code to calculate all ingredients
-
-        // Get all input elements
-        const breadQuantityInput = document.getElementById('bread-quantity');
-        const muffinQuantityInput = document.getElementById('muffin-quantity');
-        const cakeQuantityInput = document.getElementById('cake-quantity');
-
-        // Calculate all ingredients
-        function calculateTotalIngredients() {
-            const breadQuantity = parseInt(breadQuantityInput.value) || 0;
-            const muffinQuantity = parseInt(muffinQuantityInput.value) || 0;
-            const cakeQuantity = parseInt(cakeQuantityInput.value) || 0;
-
-            const breadFlour = breadQuantity * 100; // Example value, replace with actual value
-            const yeast = breadQuantity * 5; // Example value, replace with actual value
-            const allPurposeFlour = muffinQuantity * 150; // Example value, replace with actual value
-            const bakingPowder = muffinQuantity * 10; // Example value, replace with actual value
-            const cakeFlour = cakeQuantity * 200; // Example value, replace with actual value
-            const sugar = cakeQuantity * 50; // Example value, replace with actual value
-
-            const totalIngredients = breadFlour + yeast + allPurposeFlour + bakingPowder + cakeFlour + sugar;
-
-            document.getElementById('total-ingredients').textContent = `Total: ${totalIngredients} grams`;
-
-            // Calculate all ingredients for each product
-            const breadTotal = breadFlour + yeast;
-            const muffinTotal = allPurposeFlour + bakingPowder;
-            const cakeTotal = cakeFlour + sugar;
-
-            document.getElementById('bread-flour-total').textContent = `${breadFlour} grams`;
-            document.getElementById('yeast-total').textContent = `${yeast} grams`;
-            document.getElementById('all-purpose-flour-total').textContent = `${allPurposeFlour} grams`;
-            document.getElementById('baking-powder-total').textContent = `${bakingPowder} grams`;
-            document.getElementById('cake-flour-total').textContent = `${cakeFlour} grams`;
-            document.getElementById('sugar-total').textContent = `${sugar} grams`;
-
-            document.getElementById('bread-total').textContent = `${breadTotal} grams`;
-            document.getElementById('muffin-total').textContent = `${muffinTotal} grams`;
-            document.getElementById('cake-total').textContent = `${cakeTotal} grams`;
-
-            // Calculate all ingredients for all products
-            const allBreadFlourTotal = breadFlour;
-            const allYeastTotal = yeast;
-            const allAllPurposeFlourTotal = allPurposeFlour;
-            const allBakingPowderTotal = bakingPowder;
-            const allCakeFlourTotal = cakeFlour;
-            const allSugarTotal = sugar;
-
-            const allProductsTotal = allBreadFlourTotal + allYeastTotal + allAllPurposeFlourTotal + allBakingPowderTotal + allCakeFlourTotal + allSugarTotal;
-
-            document.getElementById('all-bread-flour-total').textContent = `${allBreadFlourTotal} grams`;
-            document.getElementById('all-yeast-total').textContent = `${allYeastTotal} grams`;
-            document.getElementById('all-all-purpose-flour-total').textContent = `${allAllPurposeFlourTotal} grams`;
-            document.getElementById('all-baking-powder-total').textContent = `${allBakingPowderTotal} grams`;
-            document.getElementById('all-cake-flour-total').textContent = `${allCakeFlourTotal} grams`;
-            document.getElementById('all-sugar-total').textContent = `${allSugarTotal} grams`;
-            document.getElementById('all-products-total').textContent = `${allProductsTotal} grams`;
-
-            // Calculate ingredients for bread table
-            const breadYeastTotal = yeast;
-            const breadAllPurposeFlourTotal = breadFlour;
-
-            const allBreadProductsTotal = breadYeastTotal + breadAllPurposeFlourTotal;
-
-            document.getElementById('bread-yeast-total').textContent = `${breadYeastTotal} grams`;
-            document.getElementById('bread-all-purpose-flour-total').textContent = `${breadAllPurposeFlourTotal} grams`;
-            document.getElementById('all-bread-products-total').textContent = `${allBreadProductsTotal} grams`;
-
-            // Calculate ingredients for muffin table
-            const muffinAllPurposeFlourTotal = allPurposeFlour;
-            const muffinBakingPowderTotal = bakingPowder;
-
-            const allMuffinProductsTotal = muffinAllPurposeFlourTotal + muffinBakingPowderTotal;
-
-            document.getElementById('muffin-all-purpose-flour-total').textContent = `${muffinAllPurposeFlourTotal} grams`;
-            document.getElementById('muffin-baking-powder-total').textContent = `${muffinBakingPowderTotal} grams`;
-            document.getElementById('all-muffin-products-total').textContent = `${allMuffinProductsTotal} grams`;
-
-            // Calculate ingredients for cake table
-            const cakeCakeFlourTotal = cakeFlour;
-            const cakeSugarTotal = sugar;
-
-            const allCakeProductsTotal = cakeCakeFlourTotal + cakeSugarTotal;
-
-            document.getElementById('cake-cake-flour-total').textContent = `${cakeCakeFlourTotal} grams`;
-            document.getElementById('cake-sugar-total').textContent = `${cakeSugarTotal} grams`;
-            document.getElementById('all-cake-products-total').textContent = `${allCakeProductsTotal} grams`;
-        }
-
-        // Add event listeners to calculate all ingredients when input values change
-        breadQuantityInput.addEventListener('input', calculateTotalIngredients);
-        muffinQuantityInput.addEventListener('input', calculateTotalIngredients);
-        cakeQuantityInput.addEventListener('input', calculateTotalIngredients);
-
-        // Generate PDF button click event handler
-        const generatePdfButton = document.getElementById('generate-pdf');
-        generatePdfButton.addEventListener('click', function() {
-        const doc = new window.jspdf.jsPDF();
-        const reportTables = document.querySelectorAll('table');
-        let startY = 10; // Initial Y position
-        reportTables.forEach(function(table, index) {
-            const captionElement = table.querySelector('caption');
-            if (captionElement) {
-                const caption = captionElement.textContent;
-                doc.text(caption, 10, startY);
-                doc.autoTable({ html: table, startY: startY + 10 });
-                // Update startY to the Y position where the last table ended + some margin
-                startY = doc.autoTable.previous.finalY + 20;
-            }
-        });
-        doc.save('report.pdf');
-    });
     </script>
 </body>
+
 </html>
