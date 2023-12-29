@@ -1,4 +1,4 @@
-var CACHE_NAME = 'my-cache-v2'; // Update the cache name for the new version
+var CACHE_NAME = 'my-cache-v3'; // Update the cache name for the new version
 var urlsToCache = [
     '/Calc',
     '/Calc/calc.html',
