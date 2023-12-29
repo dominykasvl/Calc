@@ -47,7 +47,7 @@
 </head>
 
 <body>
-    <h1>Ingredient Calculator</h1>
+    <h1>Ingredientų Skaičiuoklė</h1>
 
     <button id="generate-pdf">Generate PDF</button>
 
@@ -67,12 +67,51 @@
                 ]
             },
             {
-                name: 'Bread with Chocolate',
-                category: 'Bread',
+                name: 'Linų sėklų Duona',
+                category: 'Duona',
                 ingredients: [
-                    { name: 'Bread Flour', multiplier: 100 },
-                    { name: 'Yeast', multiplier: 5 },
-                    { name: 'Chocolate', multiplier: 10 }
+                    { name: 'мука', multiplier: 358 },
+                    { name: 'закваска', multiplier: 145 },
+                    { name: 'вода', multiplier: 220 },
+                    { name: 'соль', multiplier: 8.5 },
+                    { name: 'семена', multiplier: 30 }
+                ]
+            },
+            {
+                name: 'Prancūziška Duona',
+                category: 'Duona',
+                ingredients: [
+                    { name: 'мука', multiplier: 330 },
+                    { name: 'закваска', multiplier: 135 },
+                    { name: 'вода', multiplier: 210 },
+                    { name: 'сахар', multiplier: 30 },
+                    { name: 'соль', multiplier: 7 },
+                    { name: 'масло', multiplier: 20 }
+                ]
+            },
+            {
+                name: 'Pomidorinė su čederiu Duona',
+                category: 'Duona',
+                ingredients: [
+                    { name: 'мука', multiplier: 358 },
+                    { name: 'закваска', multiplier: 145 },
+                    { name: 'вода', multiplier: 120 },
+                    { name: 'томатный сок', multiplier: 100 },
+                    { name: 'соль', multiplier: 7 },
+                    { name: 'чеддер', multiplier: 60 }
+                ]
+            },
+            {
+                name: 'Karamelizuotų svogūnų Duona',
+                category: 'Duona',
+                ingredients: [
+                    { name: 'мука', multiplier: 358 },
+                    { name: 'закваска', multiplier: 145 },
+                    { name: 'вода', multiplier: 120 },
+                    { name: 'соль', multiplier: 8.5 },
+                    { name: 'солод', multiplier: 10 },
+                    { name: 'лук', multiplier: 50 },
+                    { name: 'сливочное масло', multiplier: 10 }
                 ]
             },
             // Other products...
@@ -81,7 +120,7 @@
         // Function to generate HTML for a product
         function generateProductHTML(product) {
             let html = `<h3>${product.name}</h3>
-    <label for="${product.name.toLowerCase().replace(' ', '-')}-quantity">Quantity:</label>
+    <label for="${product.name.toLowerCase().replace(' ', '-')}-quantity">Kiekis, vnt.:</label>
     <input type="number" id="${product.name.toLowerCase().replace(' ', '-')}-quantity" />`;
 
             return html;
@@ -89,27 +128,27 @@
 
         // Function to generate HTML for a product's ingredients
         function generateProductIngredientsHTML(product) {
-            let html = `<h3>Ingredients for ${product.name}</h3>
+            let html = `<h3>Ingredientai produktui "${product.name}"</h3>
 <table>
-    <caption style="display: none;">Ingredients for ${product.name}</caption>
+    <caption style="display: none;">Ingredientai produktui "${product.name}"</caption>
     <tr>
-        <th>Ingredients</th>
-        <th>Multiplier</th>
-        <th>Quantity in grams</th>
+        <th>Ingredientai</th>
+        <th>Kiekis vienam vnt.</th>
+        <th>Kiekis iš viso, g.</th>
     </tr>`;
 
             product.ingredients.forEach(ingredient => {
                 html += `<tr>
     <td>${ingredient.name}</td>
     <td><input type="number" id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-multiplier" value="${ingredient.multiplier}" /></td>
-    <td id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total">0 grams</td>
+    <td id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total">0 g.</td>
 </tr>`;
             });
 
             html += `<tr>
-    <td>Total</td>
+    <td>Iš viso</td>
     <td></td>
-    <td id="all-${product.name.toLowerCase().replace(' ', '-')}-products-total">0 grams</td>
+    <td id="all-${product.name.toLowerCase().replace(' ', '-')}-products-total">0 g.</td>
 </tr>
 </table>`;
 
@@ -150,10 +189,10 @@
                     productTotal += total;
                     totalIngredients += total;
 
-                    document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total`).textContent = `${total.toFixed(2)} grams`;
+                    document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total`).textContent = `${total.toFixed(2)} g.`;
                 });
 
-                document.getElementById(`all-${product.name.toLowerCase().replace(' ', '-')}-products-total`).textContent = `${productTotal.toFixed(2)} grams`;
+                document.getElementById(`all-${product.name.toLowerCase().replace(' ', '-')}-products-total`).textContent = `${productTotal.toFixed(2)} g.`;
             });
         }
 
