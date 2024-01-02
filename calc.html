@@ -114,6 +114,26 @@
                     { name: 'сливочное масло', multiplier: 10 }
                 ]
             },
+            {
+                name: 'Babka su šokoladinių kremu',
+                category: 'Babka',
+                ingredients: [
+                    {
+                        name: 'мука',
+                        multiplier: 358,
+                        subIngredients: [
+                            { name: 'sub-ingredient1', multiplier: 10 },
+                            { name: 'sub-ingredient2', multiplier: 20 },
+                        ]
+                    },
+                    { name: 'закваска', multiplier: 145 },
+                    { name: 'вода', multiplier: 120 },
+                    { name: 'соль', multiplier: 8.5 },
+                    { name: 'солод', multiplier: 10 },
+                    { name: 'лук', multiplier: 50 },
+                    { name: 'сливочное масло', multiplier: 10 }
+                ]
+            },
             // Other products...
         ];
 
@@ -133,16 +153,31 @@
     <caption style="display: none;">Ingredientai produktui "${product.name}"</caption>
     <tr>
         <th>Ingredientai</th>
-        <th>Kiekis vienam vnt.</th>
+        <th>Kiekis vienam vnt., g.</th>
         <th>Kiekis iš viso, g.</th>
     </tr>`;
 
             product.ingredients.forEach(ingredient => {
-                html += `<tr>
+                if (ingredient.subIngredients) {
+                    html += `<tr>
+    <td>${ingredient.name}</td>
+    <td></td>
+    <td id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total"></td>
+</tr>`;
+                    ingredient.subIngredients.forEach(subIngredient => {
+                        html += `<tr>
+    <td>--${subIngredient.name}</td>
+    <td><input type="number" id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-multiplier" value="${subIngredient.multiplier}" /></td>
+    <td id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-total">0 g.</td>
+</tr>`;
+                    });
+                } else {
+                    html += `<tr>
     <td>${ingredient.name}</td>
     <td><input type="number" id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-multiplier" value="${ingredient.multiplier}" /></td>
     <td id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total">0 g.</td>
 </tr>`;
+                }
             });
 
             html += `<tr>
@@ -183,13 +218,25 @@
                 let productTotal = 0;
 
                 product.ingredients.forEach(ingredient => {
-                    const multiplierInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-multiplier`);
-                    const multiplier = parseFloat(multiplierInput.value) || ingredient.multiplier;
-                    const total = quantity * multiplier;
-                    productTotal += total;
-                    totalIngredients += total;
+                    if (ingredient.subIngredients) {
+                        ingredient.subIngredients.forEach(subIngredient => {
+                            const subMultiplierInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-multiplier`);
+                            const subMultiplier = parseFloat(subMultiplierInput.value) || subIngredient.multiplier;
+                            const subTotal = quantity * subMultiplier;
+                            productTotal += subTotal;
+                            totalIngredients += subTotal;
 
-                    document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total`).textContent = `${total.toFixed(2)} g.`;
+                            document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-total`).textContent = `${subTotal.toFixed(2)} g.`;
+                        });
+                    } else {
+                        const multiplierInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-multiplier`);
+                        const multiplier = parseFloat(multiplierInput.value) || ingredient.multiplier;
+                        const total = quantity * multiplier;
+                        productTotal += total;
+                        totalIngredients += total;
+
+                        document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total`).textContent = `${total.toFixed(2)} g.`;
+                    }
                 });
 
                 document.getElementById(`all-${product.name.toLowerCase().replace(' ', '-')}-products-total`).textContent = `${productTotal.toFixed(2)} g.`;
@@ -202,8 +249,19 @@
             quantityInput.addEventListener('input', calculateTotalIngredients);
 
             product.ingredients.forEach(ingredient => {
-                const multiplierInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-multiplier`);
-                multiplierInput.addEventListener('input', calculateTotalIngredients);
+                if (ingredient.subIngredients) {
+                    ingredient.subIngredients.forEach(subIngredient => {
+                        const subMultiplierInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-multiplier`);
+                        if (subMultiplierInput) {
+                            subMultiplierInput.addEventListener('input', calculateTotalIngredients);
+                        }
+                    });
+                } else {
+                    const multiplierInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-multiplier`);
+                    if (multiplierInput) {
+                        multiplierInput.addEventListener('input', calculateTotalIngredients);
+                    }
+                }
             });
         });
         // Generate PDF button click event handler
@@ -231,8 +289,40 @@
                 const captionElement = table.querySelector('caption');
                 if (captionElement) {
                     const caption = captionElement.textContent;
-                    doc.text(caption, 10, startY);
-                    doc.autoTable({ html: table, startY: startY + 10, styles: { font: "myfont" } });
+
+                    // Clone the table to not modify the original one
+                    const clonedTable = table.cloneNode(true);
+
+                    // Replace input elements with their values
+                    const inputs = clonedTable.querySelectorAll('input');
+                    inputs.forEach(input => {
+                        const value = input.value;
+                        input.parentNode.textContent = value;
+                    });
+
+                    let captionDrawn = false;
+
+                    // Add the caption as a title to the autoTable
+                    doc.autoTable({
+                        html: clonedTable,
+                        startY: startY + 10,
+                        styles: { font: "myfont" },
+                        pageBreak: 'avoid',
+                        didDrawCell: function (data) {
+                            // If it's the first cell of the body section and the caption has not been drawn yet
+                            if (data.cell.section === 'body' && data.row.index === 0 && data.column.index === 0 && !captionDrawn) {
+                                // Draw the caption just above the cell
+                                doc.setFontSize(14);
+                                doc.text(caption, data.cell.x, data.cell.y - 5);
+                                captionDrawn = true;
+                            }
+                        },
+                        didDrawPage: function (data) {
+                            // Update startY to the Y position where the last table ended + some margin
+                            startY = doc.autoTable.previous.finalY + 20;
+                        }
+                    });
+
                     // Update startY to the Y position where the last table ended + some margin
                     startY = doc.autoTable.previous.finalY + 20;
                 }
