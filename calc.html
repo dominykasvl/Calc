@@ -49,8 +49,6 @@
 <body>
     <h1>Ingredientų Skaičiuoklė</h1>
 
-    <button id="generate-pdf">Generate PDF</button>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://unpkg.com/jspdf-autotable@3.8.1/dist/jspdf.plugin.autotable.js"></script>
     <script>
@@ -115,25 +113,153 @@
                 ]
             },
             {
-                name: 'Babka su šokoladinių kremu',
+                name: 'Babka su šokoladinių kremų',
                 category: 'Babka',
                 ingredients: [
                     {
-                        name: 'мука',
-                        multiplier: 358,
+                        name: 'заварка',
                         subIngredients: [
-                            { name: 'sub-ingredient1', multiplier: 10 },
-                            { name: 'sub-ingredient2', multiplier: 20 },
+                            { name: 'мука', multiplier: 50 },
+                            { name: 'вода', multiplier: 120 },
                         ]
                     },
-                    { name: 'закваска', multiplier: 145 },
-                    { name: 'вода', multiplier: 120 },
-                    { name: 'соль', multiplier: 8.5 },
-                    { name: 'солод', multiplier: 10 },
-                    { name: 'лук', multiplier: 50 },
-                    { name: 'сливочное масло', multiplier: 10 }
+                    {
+                        name: 'тесто',
+                        subIngredients: [
+                            { name: 'закваска', multiplier: 120 },
+                            { name: 'молоко', multiplier: 90 },
+                            { name: 'заварка', multiplier: 170 },
+                            { name: 'мука', multiplier: 400 },
+                            { name: 'яйцо', multiplier: 1 },
+                            { name: 'сахар', multiplier: 50 },
+                            { name: 'соль', multiplier: 7 },
+                            { name: 'сливочное масло', multiplier: 60 },
+                        ]
+                    },
+                    {
+                        name: 'крем',
+                        subIngredients: [
+                            { name: 'молоко', multiplier: 200 },
+                            { name: 'яйцо', multiplier: 3 },
+                            { name: 'сахар', multiplier: 70 },
+                            { name: 'мука', multiplier: 30 },
+                            { name: 'темный шоколад 54,5%', multiplier: 80 },
+                        ]
+                    },
                 ]
             },
+            {
+                name: 'Babka su aguonomis',
+                category: 'Babka',
+                ingredients: [
+                    {
+                        name: 'заварка',
+                        subIngredients: [
+                            { name: 'мука', multiplier: 50 },
+                            { name: 'вода', multiplier: 120 },
+                        ]
+                    },
+                    {
+                        name: 'тесто',
+                        subIngredients: [
+                            { name: 'закваска', multiplier: 120 },
+                            { name: 'молоко', multiplier: 90 },
+                            { name: 'заварка', multiplier: 170 },
+                            { name: 'мука', multiplier: 400 },
+                            { name: 'яйцо', multiplier: 1 },
+                            { name: 'сахар', multiplier: 50 },
+                            { name: 'соль', multiplier: 7 },
+                            { name: 'сливочное масло', multiplier: 60 },
+                        ]
+                    },
+                    {
+                        name: 'маковая начинка',
+                        subIngredients: [
+                            { name: 'молоко', multiplier: 175 },
+                            { name: 'манка', multiplier: 25 },
+                            { name: 'мак', multiplier: 150 },
+                            { name: 'сахар', multiplier: 70 },
+                        ]
+                    },
+                ]
+            },
+            {
+                name: 'Pan Brioche',
+                category: 'Brioche',
+                ingredients: [
+                    {
+                        name: 'заварка',
+                        subIngredients: [
+                            { name: 'мука', multiplier: 50 },
+                            { name: 'вода', multiplier: 120 },
+                        ]
+                    },
+                    {
+                        name: 'тесто',
+                        subIngredients: [
+                            { name: 'закваска', multiplier: 120 },
+                            { name: 'молоко', multiplier: 90 },
+                            { name: 'заварка', multiplier: 170 },
+                            { name: 'мука', multiplier: 400 },
+                            { name: 'яйцо', multiplier: 1 },
+                            { name: 'сахар', multiplier: 50 },
+                            { name: 'соль', multiplier: 7 },
+                            { name: 'сливочное масло', multiplier: 60 },
+                        ]
+                    },
+                ]
+            },
+            {
+                name: 'Cinnabons su citrininiu kremu',
+                category: 'Cinnabons',
+                ingredients: [
+                    {
+                        name: 'тесто',
+                        subIngredients: [
+                            { name: 'мука', multiplier: 250 },
+                            { name: 'яйцо', multiplier: 1 },
+                            { name: 'дрожжи', multiplier: 2 },
+                            { name: 'вода', multiplier: 110 },
+                            { name: 'сахар', multiplier: 30 },
+                            { name: 'масло', multiplier: 20 },
+                            { name: 'соль', multiplier: 2 },
+                        ]
+                    },
+                    {
+                        name: 'крем',
+                        subIngredients: [
+                            { name: 'кремчиз', multiplier: 200 },
+                            { name: 'сахарная пудра', multiplier: 100 },
+                            { name: 'лимон', multiplier: 1 },
+                        ]
+                    },
+                    {
+                        name: 'масло корицы',
+                        subIngredients: [
+                            { name: 'масло', multiplier: 100 },
+                            { name: 'корица', multiplier: 20 },
+                            { name: 'крахмал', multiplier: 15 },
+                            { name: 'сахар', multiplier: 80 },
+                        ]
+                    },
+                ]
+            },
+            {
+                name: 'Sausainiai',
+                category: 'Sausainiai',
+                ingredients: [
+                    { name: 'масло', multiplier: 90 },
+                    { name: 'сахар мусковадо', multiplier: 60 },
+                    { name: 'сахар', multiplier: 30 },
+                    { name: 'соль', multiplier: 1 },
+                    { name: 'яйцо', multiplier: 1 },
+                    { name: 'мука', multiplier: 135 },
+                    { name: 'какао', multiplier: 25 },
+                    { name: 'разрыхлитель', multiplier: 3 },
+                    { name: 'темный шокололад (54.5%)', multiplier: 120 },
+                    { name: 'начинка', multiplier: 4 },
+                ]
+            }
             // Other products...
         ];
 
@@ -153,39 +279,39 @@
     <caption style="display: none;">Ingredientai produktui "${product.name}"</caption>
     <tr>
         <th>Ingredientai</th>
-        <th>Kiekis vienam vnt., g.</th>
+        <th>Kiekis vienam vnt.</th>
         <th>Kiekis iš viso, g.</th>
     </tr>`;
+
+            // Ignore list for ingredients that should be denoted as 'vnt.' instead of 'g.'
+            const ignoreList = ['яйцо', 'начинка', 'лимон'];
 
             product.ingredients.forEach(ingredient => {
                 if (ingredient.subIngredients) {
                     html += `<tr>
-    <td>${ingredient.name}</td>
-    <td></td>
-    <td id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total"></td>
+<td>${ingredient.name}</td>
+<td></td>
+<td id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total"></td>
 </tr>`;
                     ingredient.subIngredients.forEach(subIngredient => {
+                        const unit = ignoreList.includes(subIngredient.name) ? 'vnt.' : 'g.';
                         html += `<tr>
-    <td>--${subIngredient.name}</td>
-    <td><input type="number" id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-multiplier" value="${subIngredient.multiplier}" /></td>
-    <td id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-total">0 g.</td>
+<td>--${subIngredient.name}</td>
+<td><input type="number" id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-multiplier" value="${subIngredient.multiplier}" /></td>
+<td id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-total">0 ${unit}</td>
 </tr>`;
                     });
                 } else {
+                    const unit = ignoreList.includes(ingredient.name) ? 'vnt.' : 'g.';
                     html += `<tr>
-    <td>${ingredient.name}</td>
-    <td><input type="number" id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-multiplier" value="${ingredient.multiplier}" /></td>
-    <td id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total">0 g.</td>
+<td>${ingredient.name}</td>
+<td><input type="number" id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-multiplier" value="${ingredient.multiplier}" /></td>
+<td id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total">0 ${unit}</td>
 </tr>`;
                 }
             });
 
-            html += `<tr>
-    <td>Iš viso</td>
-    <td></td>
-    <td id="all-${product.name.toLowerCase().replace(' ', '-')}-products-total">0 g.</td>
-</tr>
-</table>`;
+            html += `</table>`;
 
             return html;
         }
@@ -203,19 +329,19 @@
             allProductsHTML += generateProductHTML(product);
             allProductsIngredientsHTML += generateProductIngredientsHTML(product);
         });
-        document.body.innerHTML += allProductsHTML + allProductsIngredientsHTML;
+        document.body.innerHTML += allProductsHTML + `<br /><br /><br /><button id="generate-pdf">Generate PDF</button><br /><br /><hr /><br />` + allProductsIngredientsHTML;
 
         // JavaScript code to calculate all ingredients
 
         // Calculate all ingredients
         function calculateTotalIngredients() {
-            let totalIngredients = 0;
+
+            // Ignore list for ingredients that should be denoted as 'vnt.' instead of 'g.'
+            const ignoreList = ['яйцо', 'начинка', 'лимон'];
 
             products.forEach(product => {
                 const quantityInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-quantity`);
                 const quantity = parseFloat(quantityInput.value) || 0;
-
-                let productTotal = 0;
 
                 product.ingredients.forEach(ingredient => {
                     if (ingredient.subIngredients) {
@@ -223,23 +349,17 @@
                             const subMultiplierInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-multiplier`);
                             const subMultiplier = parseFloat(subMultiplierInput.value) || subIngredient.multiplier;
                             const subTotal = quantity * subMultiplier;
-                            productTotal += subTotal;
-                            totalIngredients += subTotal;
 
-                            document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-total`).textContent = `${subTotal.toFixed(2)} g.`;
+                            document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-total`).textContent = ignoreList.includes(subIngredient.name) ? `${Math.round(subTotal)} vnt.` : `${subTotal.toFixed(2)} g.`;
                         });
                     } else {
                         const multiplierInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-multiplier`);
                         const multiplier = parseFloat(multiplierInput.value) || ingredient.multiplier;
                         const total = quantity * multiplier;
-                        productTotal += total;
-                        totalIngredients += total;
 
-                        document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total`).textContent = `${total.toFixed(2)} g.`;
+                        document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-total`).textContent = ignoreList.includes(ingredient.name) ? `${Math.round(total)} vnt.` : `${total.toFixed(2)} g.`;
                     }
                 });
-
-                document.getElementById(`all-${product.name.toLowerCase().replace(' ', '-')}-products-total`).textContent = `${productTotal.toFixed(2)} g.`;
             });
         }
 
