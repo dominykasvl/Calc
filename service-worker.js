@@ -13,8 +13,8 @@ self.addEventListener('install', function (event) {
         caches.open(CACHE_NAME)
             .then(function (cache) {
                 console.log('Opened cache');
-                var cachePromises = urlsToCache.map(function(urlToCache) {
-                    return cache.add(urlToCache).catch(function(reason) {
+                var cachePromises = urlsToCache.map(function (urlToCache) {
+                    return cache.add(urlToCache).catch(function (reason) {
                         console.log(`Failed to cache ${urlToCache}: ${String(reason)}`);
                     });
                 });
@@ -23,11 +23,11 @@ self.addEventListener('install', function (event) {
     );
 });
 
-self.addEventListener('activate', function(event) {
+self.addEventListener('activate', function (event) {
     event.waitUntil(
-        caches.keys().then(function(cacheNames) {
+        caches.keys().then(function (cacheNames) {
             return Promise.all(
-                cacheNames.map(function(cacheName) {
+                cacheNames.map(function (cacheName) {
                     if (cacheName !== CACHE_NAME) {
                         console.log('Deleting out of date cache:', cacheName);
                         return caches.delete(cacheName);
