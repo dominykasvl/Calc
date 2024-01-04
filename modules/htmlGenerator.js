@@ -22,6 +22,11 @@ export function generateProductIngredientsHTML(product) {
     // Ignore list for ingredients that should be denoted as 'vnt.' instead of 'g.'
     const ignoreList = ['яйцо', 'начинка', 'лимон'];
 
+    // Dictionary to store sub-ingredient colors
+    const subIngredientColors = {};
+    let colorIndex = 0;
+    const colors = ['red', 'blue', 'green', 'darkgoldenrod', 'purple', 'orange', 'pink', 'brown', 'gray', 'cyan', 'magenta', 'teal', 'lime', 'indigo']; // Add more colors if needed
+
     product.ingredients.forEach(ingredient => {
         if (ingredient.subIngredients) {
             html += `<tr>
@@ -31,7 +36,18 @@ export function generateProductIngredientsHTML(product) {
 </tr>`;
             ingredient.subIngredients.forEach(subIngredient => {
                 const unit = ignoreList.includes(subIngredient.name) ? 'vnt.' : 'g.';
-                html += `<tr>
+
+                // Check if sub-ingredient is already in the dictionary
+                if (!subIngredientColors[subIngredient.name]) {
+                    // If not, add it with a new color
+                    subIngredientColors[subIngredient.name] = colors[colorIndex % colors.length];
+                    colorIndex++;
+                }
+
+                // Use the color from the dictionary
+                const color = subIngredientColors[subIngredient.name];
+
+                html += `<tr style="color: ${color};">
 <td>--${subIngredient.name}</td>
 <td><input type="number" id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-multiplier" value="${subIngredient.multiplier}" /></td>
 <td id="${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-total">0 ${unit}</td>
@@ -50,5 +66,4 @@ export function generateProductIngredientsHTML(product) {
     html += `</table>`;
 
     return html;
-
 }

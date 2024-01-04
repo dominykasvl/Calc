@@ -83,13 +83,22 @@ generatePdfButton.addEventListener('click', async function () {
                 startY: startY + 10,
                 styles: { font: "myfont" },
                 pageBreak: 'avoid',
-                didDrawCell: function (data) {
-                    // If it's the first cell of the body section and the caption has not been drawn yet
-                    if (data.cell.section === 'body' && data.row.index === 0 && data.column.index === 0 && !captionDrawn) {
-                        // Draw the caption just above the cell
-                        doc.setFontSize(14);
-                        doc.text(caption, data.cell.x, data.cell.y - 5);
-                        captionDrawn = true;
+                didParseCell: function (data) {
+                    // Check if the cell is in the body section
+                    if (data.cell.section === 'body') {
+                        // Get the color of the text in the original HTML cell
+                        let color = $(data.cell.raw).css('color');
+                        // Set the cell text color in the PDF
+                        data.cell.styles.textColor = color;
+                    }
+                    // Check if the cell is in the body section
+                    if (data.cell.section === 'body') {
+                        // Get the color from the style attribute of the parent tr element
+                        let color = data.cell.raw.parentElement.style.color;
+                        // If a color is set, use it for the cell text color in the PDF
+                        if (color) {
+                            data.cell.styles.textColor = color;
+                        }
                     }
                 },
                 didDrawPage: function (data) {
