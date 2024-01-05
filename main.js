@@ -31,6 +31,8 @@ products.forEach(product => {
         // Append the table to the productTablesDiv
         productTablesDiv.insertAdjacentHTML('beforeend', productIngredientsHTML);
         tableCounter++;
+        sessionStorage.setItem('tableCounter', tableCounter); // Save tableCounter to sessionStorage
+        onTableUpdate();
     });
 
     buttonRow.appendChild(generateButton);
@@ -86,8 +88,29 @@ totalIngredientsButton.addEventListener('click', () => {
         newDiv.innerHTML = ingredientTableHTML;
         document.body.appendChild(newDiv);
     }
+
+    onTableUpdate();
 });
 document.body.appendChild(totalIngredientsButton);
+
+//Create button to delete all tables in the page and clear sessionStorage
+const deleteAllTablesButton = document.createElement('button');
+deleteAllTablesButton.textContent = 'Ištrinti visas lenteles';
+deleteAllTablesButton.style.marginLeft = '110px';
+deleteAllTablesButton.style.color = 'red';
+deleteAllTablesButton.addEventListener('click', () => {
+    const confirmDelete = confirm('Ar norite ištrinti visas lenteles?');
+    if (confirmDelete) {
+        const productTablesDiv = document.getElementById('product-tables');
+        productTablesDiv.innerHTML = '';
+
+        const allIngredientsDiv = document.getElementById('all-ingredients');
+        allIngredientsDiv.innerHTML = '';
+
+        sessionStorage.clear();
+    }
+});
+document.body.appendChild(deleteAllTablesButton);
 
 const allIngredientsDiv = document.createElement('div');
 allIngredientsDiv.id = 'all-ingredients';
@@ -200,8 +223,22 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// Load saved input states when the page is loaded
+// Load saved table states when the page is loaded
 window.onload = function () {
+    var allIngredientsDiv = document.getElementById('all-ingredients');
+    var productTablesDiv = document.getElementById('product-tables');
+
+    var savedAllIngredientsTable = sessionStorage.getItem('allIngredientsTable');
+    var savedProductTables = sessionStorage.getItem('productTables');
+
+    if (savedAllIngredientsTable) {
+        allIngredientsDiv.innerHTML = savedAllIngredientsTable;
+    }
+
+    if (savedProductTables) {
+        productTablesDiv.innerHTML = savedProductTables;
+    }
+
     var inputs = document.getElementsByTagName('input');
     for (var i = 0; i < inputs.length; i++) {
         var savedInput = sessionStorage.getItem(inputs[i].id);
@@ -209,6 +246,24 @@ window.onload = function () {
             inputs[i].value = savedInput;
         }
     }
+
+    // Load tableCounter from sessionStorage
+    tableCounter = sessionStorage.getItem('tableCounter');
+    if (tableCounter === null) {
+        tableCounter = 0;
+    } else {
+        tableCounter = Number(tableCounter); // Convert to number
+    }
+}
+
+// Save table states when any table is updated
+// Assuming you have a function that is called whenever a table is updated
+function onTableUpdate() {
+    var allIngredientsDiv = document.getElementById('all-ingredients');
+    var productTablesDiv = document.getElementById('product-tables');
+
+    sessionStorage.setItem('allIngredientsTable', allIngredientsDiv.innerHTML);
+    sessionStorage.setItem('productTables', productTablesDiv.innerHTML);
 }
 
 // Save input states when any input value changes
