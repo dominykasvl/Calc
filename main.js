@@ -23,7 +23,7 @@ buttonRow.classList.add('button-row');
 
 products.forEach(product => {
     const generateButton = document.createElement('button');
-    generateButton.textContent = product.name;
+    generateButton.textContent = "+ " + product.name;
     generateButton.style.marginRight = '10px'; // Add padding between buttons
     generateButton.style.marginTop = '10px'; // Add padding between buttons and tables
     generateButton.addEventListener('click', () => {
