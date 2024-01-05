@@ -1,44 +1,103 @@
 import { products } from './modules/productData.js';
-import { generateProductHTML, generateProductIngredientsHTML } from './modules/htmlGenerator.js';
+import { generateProductHTML, generateProductIngredientsHTML, generateIngredientTableHTML } from './modules/htmlGenerator.js';
 import { calculateTotalIngredients } from './modules/ingredientCalculator.js';
 
 // Generate the HTML for all products and add it to the page
 let allProductsHTML = '';
-let allProductsIngredientsHTML = '';
 let currentCategory = '';
+let tableCounter = 0;
+// products.forEach(product => {
+//     if (product.category !== currentCategory) {
+//         currentCategory = product.category;
+//         allProductsHTML += `<h2>${currentCategory}</h2>`;
+//     }
+//     allProductsHTML += generateProductHTML(product, tableCounter);
+// });
+
+document.body.innerHTML += allProductsHTML + `<button id="generate-pdf">Generuoti PDF</button><hr />`;
+
+
+// Creating a button row for each product and appending it to the document body
+const buttonRow = document.createElement('div');
+buttonRow.classList.add('button-row');
+
 products.forEach(product => {
-    if (product.category !== currentCategory) {
-        currentCategory = product.category;
-        allProductsHTML += `<h2>${currentCategory}</h2>`;
-        allProductsIngredientsHTML += `<h2>${currentCategory}</h2>`;
-    }
-    allProductsHTML += generateProductHTML(product);
-    allProductsIngredientsHTML += generateProductIngredientsHTML(product);
+    const generateButton = document.createElement('button');
+    generateButton.textContent = product.name;
+    generateButton.style.marginRight = '10px'; // Add padding between buttons
+    generateButton.style.marginTop = '10px'; // Add padding between buttons and tables
+    generateButton.addEventListener('click', () => {
+        const productIngredientsHTML = generateProductIngredientsHTML(product, tableCounter);
+        // Append the table to the productTablesDiv
+        productTablesDiv.insertAdjacentHTML('beforeend', productIngredientsHTML);
+        tableCounter++;
+    });
+
+    buttonRow.appendChild(generateButton);
 });
-document.body.innerHTML += allProductsHTML + `<br /><br /><br /><button id="generate-pdf">Generate PDF</button><br /><br /><hr /><br />` + allProductsIngredientsHTML;
 
+// Append the button row to the document body
+document.body.appendChild(buttonRow);
+document.body.appendChild(document.createElement('hr'));
 
-// Add event listeners to calculate all ingredients when input values change
-products.forEach(product => {
-    const quantityInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-quantity`);
-    quantityInput.addEventListener('input', () => calculateTotalIngredients(products));
+// Button to calculate all ingredients
+const totalIngredientsButton = document.createElement('button');
+totalIngredientsButton.textContent = 'Paskaičiuoti visus ingredientus';
+totalIngredientsButton.addEventListener('click', () => {
+    const productTables = document.querySelectorAll('#product-tables table');
+    if (productTables.length === 0) {
+        alert('Pridėkite bent vieną produktą!');
+        return;
+    }
 
-    product.ingredients.forEach(ingredient => {
-        if (ingredient.subIngredients) {
-            ingredient.subIngredients.forEach(subIngredient => {
-                const subMultiplierInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-${subIngredient.name.toLowerCase().replace(' ', '-')}-multiplier`);
-                if (subMultiplierInput) {
-                    subMultiplierInput.addEventListener('input', () => calculateTotalIngredients(products));
-                }
-            });
-        } else {
-            const multiplierInput = document.getElementById(`${product.name.toLowerCase().replace(' ', '-')}-${ingredient.name.toLowerCase().replace(' ', '-')}-multiplier`);
-            if (multiplierInput) {
-                multiplierInput.addEventListener('input', () => calculateTotalIngredients(products));
+    const ingredientTotals = {};
+    productTables.forEach(table => {
+        const rows = table.querySelectorAll('tr');
+        // Skip the first row (header)
+        for (let i = 1; i < rows.length; i++) {
+            const cells = rows[i].querySelectorAll('td');
+            const ingredientNameHTML = cells[0].innerHTML;
+            // Skip if ingredient is enclosed in <strong>
+            if (ingredientNameHTML.includes('<strong>')) {
+                continue;
+            }
+            const ingredientName = cells[0].textContent.trim();
+            const quantity = Number(cells[1].querySelector('input').value);
+            if (ingredientTotals[ingredientName]) {
+                ingredientTotals[ingredientName] += quantity;
+            } else {
+                ingredientTotals[ingredientName] = quantity;
             }
         }
     });
+
+    const allIngredientsDiv = document.getElementById('all-ingredients');
+    let ingredientTableHTML = '<h3>Visų ingredientų lentelė</h3><table><caption style="display: none;">Visų ingredientų lentelė</caption><tr><th>Ingredientai</th><th>Iš viso kiekis vnt. / g.</th></tr>';
+    for (const [ingredient, total] of Object.entries(ingredientTotals)) {
+        ingredientTableHTML += `<tr><td>${ingredient}</td><td id="${ingredient}-total">${total}</td></tr>`;
+    }
+    ingredientTableHTML += '</table>';
+
+    if (allIngredientsDiv) {
+        allIngredientsDiv.innerHTML = ingredientTableHTML;
+    } else {
+        const newDiv = document.createElement('div');
+        newDiv.id = 'all-ingredients';
+        newDiv.innerHTML = ingredientTableHTML;
+        document.body.appendChild(newDiv);
+    }
 });
+document.body.appendChild(totalIngredientsButton);
+
+const allIngredientsDiv = document.createElement('div');
+allIngredientsDiv.id = 'all-ingredients';
+
+const productTablesDiv = document.createElement('div');
+productTablesDiv.id = 'product-tables';
+
+document.body.appendChild(allIngredientsDiv);
+document.body.appendChild(productTablesDiv);
+
 // Generate PDF button click event handler
 const generatePdfButton = document.getElementById('generate-pdf');
 generatePdfButton.addEventListener('click', async function () {
@@ -86,19 +145,21 @@ generatePdfButton.addEventListener('click', async function () {
                 didParseCell: function (data) {
                     // Check if the cell is in the body section
                     if (data.cell.section === 'body') {
-                        // Get the color of the text in the original HTML cell
-                        let color = $(data.cell.raw).css('color');
-                        // Set the cell text color in the PDF
-                        data.cell.styles.textColor = color;
-                    }
-                    // Check if the cell is in the body section
-                    if (data.cell.section === 'body') {
                         // Get the color from the style attribute of the parent tr element
                         let color = data.cell.raw.parentElement.style.color;
                         // If a color is set, use it for the cell text color in the PDF
                         if (color) {
                             data.cell.styles.textColor = color;
                         }
+                    }
+                },
+                didDrawCell: function (data) {
+                    // If it's the first cell of the body section and the caption has not been drawn yet
+                    if (data.cell.section === 'body' && data.row.index === 0 && data.column.index === 0 && !captionDrawn) {
+                        // Draw the caption just above the cell
+                        doc.setFontSize(14);
+                        doc.text(caption, data.cell.x, data.cell.y - 5);
+                        captionDrawn = true;
                     }
                 },
                 didDrawPage: function (data) {
@@ -133,7 +194,6 @@ window.onload = function () {
             inputs[i].value = savedInput;
         }
     }
-    calculateTotalIngredients(products);
 }
 
 // Save input states when any input value changes

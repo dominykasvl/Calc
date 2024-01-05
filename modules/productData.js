@@ -202,7 +202,7 @@ export const products = [
             { name: 'мука', multiplier: 135 },
             { name: 'какао', multiplier: 25 },
             { name: 'разрыхлитель', multiplier: 3 },
-            { name: 'темный шокололад (54.5%)', multiplier: 120 },
+            { name: 'темный шоколад 54,5%', multiplier: 120 },
             { name: 'начинка', multiplier: 4 },
         ]
     }
