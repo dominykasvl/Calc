@@ -117,6 +117,21 @@ generatePdfButton.addEventListener('click', async function () {
     doc.addFont("myfont.ttf", "myfont", "normal");
     doc.setFont("myfont");
 
+    // Add current date
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + '/' + mm + '/' + dd;
+    doc.text(today, 5, 7);
+
+    // Add total price
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const text = "*Čia suma bus*";
+    const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor;
+    const textX = pageWidth - textWidth - 5; // Adjust the position as needed
+    doc.text(text, textX, 7);
+
     const reportTables = document.querySelectorAll('table');
     let startY = 10; // Initial Y position
     reportTables.forEach(function (table, index) {
