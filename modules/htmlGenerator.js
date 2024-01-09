@@ -6,10 +6,24 @@ export function generateProductHTML(product) {
     return html;
 }
 
+// Function to generate HTML list of all product prices
+export function generateProductPriceList(products) {
+    let html = `<h3>Produktų kainos</h3>
+                <ul>`;
+    products.forEach(product => {
+        html += `<li>${product.name}: <input type="number" value="${product.price}" id="${product.name.toLowerCase().replace(' ', '-')}-price" /> €</li>`;
+    });
+    html += `</ul>`;
+    return html;
+}
+
 // Function to generate HTML for a product's ingredients
 export function generateProductIngredientsHTML(product, tableCounter) {
     let html = `<h3>Ingredientai produktui "${product.name}"</h3>
                 <table>
+                <ul>
+                    <li>Kaina: <input type="number" value="${product.price}" class="price" id="${generateId(product.name, "price", tableCounter)}" /> €</li>
+                </ul>
                 <caption style="display: none;">Ingredientai produktui "${product.name}"</caption>
                 <tr>
                     <th>Ingredientai</th>

@@ -3,6 +3,7 @@ export const products = [
     {
         name: 'Klasikinė Duona',
         category: 'Duona',
+        price: 7,
         ingredients: [
             { name: 'мука', multiplier: 358 },
             { name: 'закваска', multiplier: 145 },
@@ -13,6 +14,7 @@ export const products = [
     {
         name: 'Linų sėklų Duona',
         category: 'Duona',
+        price: 8,
         ingredients: [
             { name: 'мука', multiplier: 358 },
             { name: 'закваска', multiplier: 145 },
@@ -24,6 +26,7 @@ export const products = [
     {
         name: 'Prancūziška Duona',
         category: 'Duona',
+        price: 8,
         ingredients: [
             { name: 'мука', multiplier: 330 },
             { name: 'закваска', multiplier: 135 },
@@ -36,6 +39,7 @@ export const products = [
     {
         name: 'Pomidorinė su čederiu Duona',
         category: 'Duona',
+        price: 9,
         ingredients: [
             { name: 'мука', multiplier: 358 },
             { name: 'закваска', multiplier: 145 },
@@ -48,6 +52,7 @@ export const products = [
     {
         name: 'Karamelizuotų svogūnų Duona',
         category: 'Duona',
+        price: 8,
         ingredients: [
             { name: 'мука', multiplier: 358 },
             { name: 'закваска', multiplier: 145 },
@@ -61,6 +66,7 @@ export const products = [
     {
         name: 'Babka su šokoladinių kremų',
         category: 'Babka',
+        price: 16,
         ingredients: [
             {
                 name: 'заварка',
@@ -97,6 +103,7 @@ export const products = [
     {
         name: 'Babka su aguonomis',
         category: 'Babka',
+        price: 14,
         ingredients: [
             {
                 name: 'заварка',
@@ -132,6 +139,7 @@ export const products = [
     {
         name: 'Pan Brioche',
         category: 'Brioche',
+        price: 8,
         ingredients: [
             {
                 name: 'заварка',
@@ -158,6 +166,7 @@ export const products = [
     {
         name: 'Cinnabons su citrininiu kremu',
         category: 'Cinnabons',
+        price: 8,
         ingredients: [
             {
                 name: 'тесто',
@@ -193,6 +202,7 @@ export const products = [
     {
         name: 'Sausainiai',
         category: 'Sausainiai',
+        price: 7,
         ingredients: [
             { name: 'масло', multiplier: 90 },
             { name: 'сахар мусковадо', multiplier: 60 },
