@@ -172,6 +172,14 @@ window.onload = function () {
         }
     }
 
+    var inputsSavedPrice = document.getElementsByClassName('savedPrice');
+    for (var i = 0; i < inputsSavedPrice.length; i++) {
+        var savedInput = localStorage.getItem(inputsSavedPrice[i].id);
+        if (savedInput) {
+            inputsSavedPrice[i].value = savedInput;
+        }
+    }
+
     // Load tableCounter from sessionStorage
     tableCounter = sessionStorage.getItem('tableCounter');
     if (tableCounter === null) {
@@ -179,6 +187,19 @@ window.onload = function () {
     } else {
         tableCounter = Number(tableCounter); // Convert to number
     }
+
+    const details = document.getElementById('productPriceDetails');
+
+    // Load the saved state from Local Storage
+    const isOpen = localStorage.getItem('productPriceDetails');
+    if (isOpen === 'true') {
+        details.setAttribute('open', '');
+    }
+
+    // Save the state to Local Storage whenever it changes
+    details.addEventListener('toggle', function() {
+        localStorage.setItem('productPriceDetails', details.open);
+    });
 }
 
 // Save table states when any table is updated
@@ -194,5 +215,9 @@ function onTableUpdate() {
 // Save input states when any input value changes
 window.oninput = function (e) {
     var input = e.target;
-    sessionStorage.setItem(input.id, input.value);
+    if (input.classList.contains('savedPrice')) {
+        localStorage.setItem(input.id, input.value);
+    } else {
+        sessionStorage.setItem(input.id, input.value);
+    }
 }
