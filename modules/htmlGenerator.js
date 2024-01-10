@@ -11,7 +11,7 @@ export function generateProductPriceList(products) {
     let html = `<h3>Produktų kainos</h3>
                 <ul>`;
     products.forEach(product => {
-        html += `<li>${product.name}: <input type="number" value="${product.price}" id="${product.name.toLowerCase().replace(' ', '-')}-price" /> €</li>`;
+        html += `<li>${product.name}: <input type="number" value="${product.price}" id="${generateId(product.name, "price")}" /> €</li>`;
     });
     html += `</ul>`;
     return html;
@@ -21,10 +21,11 @@ export function generateProductPriceList(products) {
 export function generateProductIngredientsHTML(product, tableCounter) {
     let html = `<h3>Ingredientai produktui "${product.name}"</h3>
                 <table>
-                <ul>
-                    <li>Kaina: <input type="number" value="${product.price}" class="price" id="${generateId(product.name, "price", tableCounter)}" /> €</li>
-                </ul>
                 <caption style="display: none;">Ingredientai produktui "${product.name}"</caption>
+                <tr>
+                    <th>Kaina</th>
+                    <th><input type="number" value="${product.price}" class="price" id="${generateId(product.name, "price", tableCounter)}" /> €</li></th>
+                </tr>
                 <tr>
                     <th>Ingredientai</th>
                     <th>Kiekis vienam vnt. / g.</th>
