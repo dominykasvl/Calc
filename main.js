@@ -29,8 +29,16 @@ products.forEach(product => {
     generateButton.style.marginTop = '10px'; // Add padding between buttons and tables
     generateButton.addEventListener('click', () => {
         const productIngredientsHTML = generateProductIngredientsHTML(product, tableCounter);
-        // Append the table to the productTablesDiv
-        productTablesDiv.insertAdjacentHTML('beforeend', productIngredientsHTML);
+        const categoryDivId = product.category.toLowerCase().replace(/\s/g, '-');
+        const categoryDiv = document.getElementById(categoryDivId);
+        if (categoryDiv) {
+            categoryDiv.insertAdjacentHTML('beforeend', productIngredientsHTML);
+        } else {
+            const newCategoryDiv = document.createElement('div');
+            newCategoryDiv.id = categoryDivId;
+            newCategoryDiv.innerHTML = `<h2>${product.category}</h2>` + productIngredientsHTML; // Fix: Append productIngredientsHTML as innerHTML
+            productTablesDiv.appendChild(newCategoryDiv);
+        }
         tableCounter++;
         sessionStorage.setItem('tableCounter', tableCounter); // Save tableCounter to sessionStorage
         onTableUpdate();
