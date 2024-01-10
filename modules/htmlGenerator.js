@@ -24,7 +24,7 @@ export function generateProductIngredientsHTML(product, tableCounter) {
                 <caption style="display: none;">Ingredientai produktui "${product.name}"</caption>
                 <tr>
                     <th>Kaina</th>
-                    <th><input type="number" value="${product.price}" class="price" id="${generateId(product.name, "price", tableCounter)}" /> €</li></th>
+                    <th><input type="number" value="${getProductPriceFromTable(generateId(product.name, "price"))}" class="price" id="${generateId(product.name, "price", tableCounter)}" /> €</li></th>
                 </tr>
                 <tr>
                     <th>Ingredientai</th>
@@ -42,6 +42,13 @@ export function generateProductIngredientsHTML(product, tableCounter) {
     html += `</table>`;
 
     return html;
+}
+function getProductPriceFromTable(productId) {
+    const inputElement = document.getElementById(productId);
+    if (inputElement) {
+        return inputElement.value;
+    }
+    return null;
 }
 
 function generateIngredientHTML(ingredient, product, tableCounter, subIngredientColors, colors) {

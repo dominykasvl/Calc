@@ -57,7 +57,7 @@ totalIngredientsButton.addEventListener('click', () => {
     productTables.forEach(table => {
         const rows = table.querySelectorAll('tr');
         // Skip the first row (header)
-        for (let i = 1; i < rows.length; i++) {
+        for (let i = 2; i < rows.length; i++) {
             const cells = rows[i].querySelectorAll('td');
             const ingredientNameHTML = cells[0].innerHTML;
             // Skip if ingredient is enclosed in <strong>
