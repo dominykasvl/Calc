@@ -43,8 +43,35 @@
                 background-color: #555;
             }
         }
+
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 18px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            /* Make table layout automatic */
+            table {
+                width: 100%;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            /* Add borders to cells */
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            /* Add more styles for mobile devices here */
+        }
     </style>
-    
+
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
 
