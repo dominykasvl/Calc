@@ -25,8 +25,6 @@ buttonRow.classList.add('button-row');
 products.forEach(product => {
     const generateButton = document.createElement('button');
     generateButton.textContent = "+ " + product.name;
-    generateButton.style.marginRight = '10px'; // Add padding between buttons
-    generateButton.style.marginTop = '10px'; // Add padding between buttons and tables
     generateButton.addEventListener('click', () => {
         const productIngredientsHTML = generateProductIngredientsHTML(product, tableCounter);
         const categoryDivId = product.category.toLowerCase().replace(/\s/g, '-');
@@ -105,8 +103,7 @@ document.body.appendChild(totalIngredientsButton);
 //Create button to delete all tables in the page and clear sessionStorage
 const deleteAllTablesButton = document.createElement('button');
 deleteAllTablesButton.textContent = 'Ištrinti visas lenteles';
-deleteAllTablesButton.style.marginLeft = '110px';
-deleteAllTablesButton.style.color = 'red';
+deleteAllTablesButton.classList.add('danger'); // Fix: Set the danger class correctly
 deleteAllTablesButton.addEventListener('click', () => {
     const confirmDelete = confirm('Ar norite ištrinti visas lenteles?');
     if (confirmDelete) {

@@ -2,8 +2,13 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingredient Calculator</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
@@ -69,6 +74,34 @@
             }
 
             /* Add more styles for mobile devices here */
+        }
+
+        button {
+            background-color: orangered;
+            border: none;
+            color: white;
+            padding: 10px 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 8px;
+            transition-duration: 0.4s;
+        }
+
+        .danger {
+            background-color: red;
+        }
+        
+        .danger:hover {
+            background-color: white;
+            color: red;
+        }
+
+        button:hover {
+            box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+            background-color: white;
+            color: black;
         }
     </style>
 
