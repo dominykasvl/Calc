@@ -127,6 +127,7 @@ allIngredientsDiv.id = 'all-ingredients';
 
 const productTablesDiv = document.createElement('div');
 productTablesDiv.id = 'product-tables';
+productTablesDiv.classList.add('tableStyles');
 
 document.body.appendChild(productPricesDiv);
 document.body.appendChild(allIngredientsDiv);
@@ -218,3 +219,10 @@ window.oninput = function (e) {
         sessionStorage.setItem(input.id, input.value);
     }
 }
+
+window.addEventListener('beforeunload', function (e) {
+    // Cancel the event
+    e.preventDefault();
+    // Chrome requires returnValue to be set
+    e.returnValue = '';
+});

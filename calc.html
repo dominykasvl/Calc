@@ -9,9 +9,19 @@
             box-sizing: border-box;
         }
 
+        .tableStyles {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
+        }
+
+        tr:hover {
+            background-color: coral;
         }
 
         th,
@@ -50,6 +60,10 @@
         }
 
         @media screen and (max-width: 600px) {
+            table {
+                width: 100%;
+            }
+
             body {
                 font-size: 18px;
             }
