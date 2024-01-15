@@ -90,7 +90,7 @@ totalIngredientsButton.addEventListener('click', () => {
 
     onTableUpdate();
 });
-document.body.appendChild(totalIngredientsButton);
+//document.body.appendChild(totalIngredientsButton);
 
 //Create button to delete all tables in the page and clear sessionStorage
 const deleteAllTablesButton = document.createElement('button');
@@ -108,7 +108,34 @@ deleteAllTablesButton.addEventListener('click', () => {
         sessionStorage.clear();
     }
 });
-document.body.appendChild(deleteAllTablesButton);
+//document.body.appendChild(deleteAllTablesButton);
+
+const outerDiv = document.createElement('div');
+outerDiv.classList.add('d-flex', 'justify-content-center');
+
+const innerDiv = document.createElement('div');
+innerDiv.classList.add('btn-group');
+innerDiv.setAttribute('role', 'group');
+
+const pdfButton = document.createElement('button');
+pdfButton.textContent = 'Generuoti PDF';
+pdfButton.id = 'generate-pdf';
+
+const editPricesButton = document.createElement('button');
+editPricesButton.textContent = 'Redaguoti kainas';
+editPricesButton.classList.add('btn', 'btn-warning');
+editPricesButton.dataset.bsToggle = 'modal';
+editPricesButton.dataset.bsTarget = '#priceModal';
+
+innerDiv.appendChild(totalIngredientsButton);
+innerDiv.appendChild(editPricesButton);
+innerDiv.appendChild(pdfButton);
+innerDiv.appendChild(deleteAllTablesButton);
+
+outerDiv.appendChild(innerDiv);
+
+document.body.appendChild(outerDiv);
+document.body.appendChild(document.createElement('hr'));
 
 const productPricesDiv = document.getElementById('product-prices');
 productPricesDiv.innerHTML = generateProductPriceList(products);
