@@ -10,9 +10,9 @@ export function generateProductHTML(product) {
 export function generateProductPriceList(products) {
     let html = `<hr/><details id="productPriceDetails">
                     <summary>Produktų kainos</summary>
-                    <ul>`;
+                    <ul class="list-group list-group-vertical">`;
     products.forEach(product => {
-        html += `<li>${product.name}: <input class="savedPrice" type="number" value="${product.price}" id="${generateId(product.name, "price")}" /> €</li>`;
+        html += `<li class="list-group-item">${product.name}: <input class="savedPrice" type="number" value="${product.price}" id="${generateId(product.name, "price")}" /> €</li>`;
     });
     html += `</ul>
               </details>`;
@@ -21,14 +21,14 @@ export function generateProductPriceList(products) {
 
 // Function to generate HTML for a product's ingredients
 export function generateProductIngredientsHTML(product, tableCounter) {
-    let html = `<h3>Ingredientai produktui "${product.name}"</h3>
-                <table>
+    let html = `<h3 class="h3">Ingredientai produktui "${product.name}"</h3>
+                <table class="table table-hover table-bordered">
                 <caption style="display: none;">Ingredientai produktui "${product.name}"</caption>
-                <tr>
+                <tr class="table-dark">
                     <th>Kaina</th>
                     <th><input type="number" value="${getProductPriceFromTable(generateId(product.name, "price"))}" class="price" id="${generateId(product.name, "price", tableCounter)}" /> €</li></th>
                 </tr>
-                <tr>
+                <tr class="table-dark">
                     <th>Ingredientai</th>
                     <th>Kiekis vienam vnt. / g.</th>
                 </tr>`;
@@ -57,7 +57,7 @@ function generateIngredientHTML(ingredient, product, tableCounter, subIngredient
     let html = '';
 
     if (ingredient.subIngredients) {
-        html += `<tr>
+        html += `<tr class="table-secondary">
         <td><strong>${ingredient.name}</strong></td>
         <td></td>
         </tr>`;
@@ -99,10 +99,10 @@ function generateId(...parts) {
 
 // Function to generate HTML for all used ingredients
 export function generateIngredientTableHTML(products) {
-    let html = `<h3>Ingredientų lentelė</h3>
-                <table>
+    let html = `<h3 class="h3">Ingredientų lentelė</h3>
+                <table class="table table-hover table-bordered">
                 <caption style="display: none;">Ingredientų lentelė</caption>
-                <tr>
+                <tr class="table-dark">
                     <th>Ingredientai</th>
                     <th>Viso kiekis</th>
                 </tr>`;

@@ -1,30 +1,22 @@
 import { products } from '/Calc/modules/productData.js';
-import { generateProductHTML, generateProductIngredientsHTML, generateIngredientTableHTML, generateProductPriceList } from '/Calc/modules/htmlGenerator.js';
-import { calculateTotalIngredients } from '/Calc/modules/ingredientCalculator.js';
+import { generateProductIngredientsHTML, generateProductPriceList } from '/Calc/modules/htmlGenerator.js';
 import { createPdfButton } from '/Calc/modules/pdfReport.js';
 
 // Generate the HTML for all products and add it to the page
 let allProductsHTML = '';
-let currentCategory = '';
 let tableCounter = 0;
-// products.forEach(product => {
-//     if (product.category !== currentCategory) {
-//         currentCategory = product.category;
-//         allProductsHTML += `<h2>${currentCategory}</h2>`;
-//     }
-//     allProductsHTML += generateProductHTML(product, tableCounter);
-// });
 
 document.body.innerHTML += allProductsHTML + `<button id="generate-pdf">Generuoti PDF</button><hr />`;
 
 
 // Creating a button row for each product and appending it to the document body
 const buttonRow = document.createElement('div');
-buttonRow.classList.add('button-row');
+buttonRow.classList.add('container-fluid',  'row');
 
 products.forEach(product => {
     const generateButton = document.createElement('button');
     generateButton.textContent = "+ " + product.name;
+    generateButton.classList.add('btn', 'btn-outline-dark', 'col-sm-3');
     generateButton.addEventListener('click', () => {
         const productIngredientsHTML = generateProductIngredientsHTML(product, tableCounter);
         const categoryDivId = product.category.toLowerCase().replace(/\s/g, '-');
@@ -52,6 +44,7 @@ document.body.appendChild(document.createElement('hr'));
 // Button to calculate all ingredients
 const totalIngredientsButton = document.createElement('button');
 totalIngredientsButton.textContent = 'Paskaičiuoti visus ingredientus';
+totalIngredientsButton.classList.add('btn', 'btn-success');
 totalIngredientsButton.addEventListener('click', () => {
     const productTables = document.querySelectorAll('#product-tables table');
     if (productTables.length === 0) {
@@ -81,7 +74,7 @@ totalIngredientsButton.addEventListener('click', () => {
     });
 
     const allIngredientsDiv = document.getElementById('all-ingredients');
-    let ingredientTableHTML = '<h3>Visų ingredientų lentelė</h3><table><caption style="display: none;">Visų ingredientų lentelė</caption><tr><th>Ingredientai</th><th>Iš viso kiekis vnt. / g.</th></tr>';
+    let ingredientTableHTML = '<h3 class="h3">Visų ingredientų lentelė</h3><table class="table table-hover table-bordered"><caption style="display: none;">Visų ingredientų lentelė</caption><tr class="table-dark"><th>Ingredientai</th><th>Iš viso kiekis vnt. / g.</th></tr>';
     for (const [ingredient, total] of Object.entries(ingredientTotals)) {
         ingredientTableHTML += `<tr><td>${ingredient}</td><td id="${ingredient}-total">${total}</td></tr>`;
     }
@@ -103,7 +96,7 @@ document.body.appendChild(totalIngredientsButton);
 //Create button to delete all tables in the page and clear sessionStorage
 const deleteAllTablesButton = document.createElement('button');
 deleteAllTablesButton.textContent = 'Ištrinti visas lenteles';
-deleteAllTablesButton.classList.add('danger'); // Fix: Set the danger class correctly
+deleteAllTablesButton.classList.add('btn', 'btn-danger');
 deleteAllTablesButton.addEventListener('click', () => {
     const confirmDelete = confirm('Ar norite ištrinti visas lenteles?');
     if (confirmDelete) {
@@ -120,14 +113,16 @@ document.body.appendChild(deleteAllTablesButton);
 
 const productPricesDiv = document.createElement('div');
 productPricesDiv.id = 'product-prices';
+productPricesDiv.classList.add('container');
 productPricesDiv.innerHTML = generateProductPriceList(products);
 
 const allIngredientsDiv = document.createElement('div');
 allIngredientsDiv.id = 'all-ingredients';
+allIngredientsDiv.classList.add('container');
 
 const productTablesDiv = document.createElement('div');
 productTablesDiv.id = 'product-tables';
-productTablesDiv.classList.add('tableStyles');
+productTablesDiv.classList.add('container');
 
 document.body.appendChild(productPricesDiv);
 document.body.appendChild(allIngredientsDiv);

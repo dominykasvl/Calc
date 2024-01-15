@@ -64,7 +64,7 @@ export const products = [
         ]
     },
     {
-        name: 'Babka su šokoladinių kremų',
+        name: 'Babka su šokoladiniu kremu',
         category: 'Babka',
         price: 16,
         ingredients: [

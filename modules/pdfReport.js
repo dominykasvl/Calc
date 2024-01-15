@@ -1,6 +1,7 @@
 export function createPdfButton() {
     // Generate PDF button click event handler
     const generatePdfButton = document.getElementById('generate-pdf');
+    generatePdfButton.classList.add('btn', 'btn-primary');
     generatePdfButton.addEventListener('click', async function () {
         const doc = new window.jspdf.jsPDF();
 

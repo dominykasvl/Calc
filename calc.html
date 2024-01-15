@@ -3,133 +3,22 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <link href="/Calc/plugins/bootstrap.min.css" rel="stylesheet">
+    <script src="/Calc/plugins/bootstrap.min.js"></script>
+
     <title>Ingredient Calculator</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        .tableStyles {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        tr:hover {
-            background-color: coral;
-        }
-
-        th,
-        td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        /* Light theme */
-        @media (prefers-color-scheme: light) {
-            body {
-                background-color: white;
-                color: black;
-            }
-
-            th {
-                background-color: #f2f2f2;
-            }
-        }
-
-        /* Dark theme */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #333;
-                color: white;
-            }
-
-            th {
-                background-color: #555;
-            }
-        }
-
-        @media screen and (max-width: 600px) {
-            table {
-                width: 100%;
-            }
-
-            body {
-                font-size: 18px;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-
-            /* Make table layout automatic */
-            table {
-                width: 100%;
-                overflow-x: auto;
-            }
-
-            /* Add borders to cells */
-            th,
-            td {
-                border: 1px solid #ddd;
-                padding: 8px;
-            }
-
-            /* Add more styles for mobile devices here */
-        }
-
-        button {
-            background-color: orangered;
-            border: none;
-            color: white;
-            padding: 10px 5px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 8px;
-            transition-duration: 0.4s;
-            margin-bottom: 10px;
-            /* Add space between each button */
-            margin-right: 10px;
-        }
-
-        .danger {
-            background-color: red;
-        }
-
-        .danger:hover {
-            background-color: white;
-            color: red;
-        }
-
-        button:hover {
-            box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
-            background-color: white;
-            color: black;
-        }
-
-        details {
-            border: 1px solid #ddd;
-            padding: 10px;
-        }
-    </style>
 
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
 
 <body>
-    <h1>Ingredientų Skaičiuoklė</h1>
+    <nav class="navbar navbar-expand-lg navbar-light justify-content-center container-fluid" style="background-color: #ead8c0;">
+        <a class="navbar-brand" href="#">
+          <img src="/Calc/logo/logo.jpeg" alt="Logo" class="img-fluid img-thumbnail" style="height:80px;">
+        </a>
+    </nav>
 
     <script src="/Calc/plugins/jspdf.umd.min.js"></script>
     <script src="/Calc/plugins/jspdf.plugin.autotable.js"></script>
