@@ -21,7 +21,7 @@ export function generateProductPriceList(products) {
 // Function to generate HTML for a product's ingredients
 export function generateProductIngredientsHTML(product, tableCounter) {
     let html = `<h3 class="h3">Ingredientai produktui "${product.name}"</h3>
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover table-bordered table-sm">
                 <caption style="display: none;">Ingredientai produktui "${product.name}"</caption>
                 <tr class="table-dark">
                     <th>Kaina</th>
