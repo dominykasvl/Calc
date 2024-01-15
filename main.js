@@ -10,12 +10,12 @@ document.body.innerHTML += `<hr />`;
 
 // Creating a button row for each product and appending it to the document body
 const buttonRow = document.createElement('div');
-buttonRow.classList.add('container-fluid',  'row');
+buttonRow.classList.add('container-fluid', 'btn-group', 'flex-column', 'flex-lg-row');
 
 products.forEach(product => {
     const generateButton = document.createElement('button');
     generateButton.textContent = "+ " + product.name;
-    generateButton.classList.add('btn', 'btn-outline-dark', 'col-sm-3');
+    generateButton.classList.add('btn', 'btn-outline-dark');
     generateButton.addEventListener('click', () => {
         const productIngredientsHTML = generateProductIngredientsHTML(product, tableCounter);
         const categoryDivId = product.category.toLowerCase().replace(/\s/g, '-');
