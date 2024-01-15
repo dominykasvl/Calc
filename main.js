@@ -3,10 +3,9 @@ import { generateProductIngredientsHTML, generateProductPriceList } from '/Calc/
 import { createPdfButton } from '/Calc/modules/pdfReport.js';
 
 // Generate the HTML for all products and add it to the page
-let allProductsHTML = '';
 let tableCounter = 0;
 
-document.body.innerHTML += allProductsHTML + `<button id="generate-pdf">Generuoti PDF</button><hr />`;
+document.body.innerHTML += `<hr />`;
 
 
 // Creating a button row for each product and appending it to the document body
@@ -111,9 +110,7 @@ deleteAllTablesButton.addEventListener('click', () => {
 });
 document.body.appendChild(deleteAllTablesButton);
 
-const productPricesDiv = document.createElement('div');
-productPricesDiv.id = 'product-prices';
-productPricesDiv.classList.add('container');
+const productPricesDiv = document.getElementById('product-prices');
 productPricesDiv.innerHTML = generateProductPriceList(products);
 
 const allIngredientsDiv = document.createElement('div');
@@ -124,7 +121,6 @@ const productTablesDiv = document.createElement('div');
 productTablesDiv.id = 'product-tables';
 productTablesDiv.classList.add('container');
 
-document.body.appendChild(productPricesDiv);
 document.body.appendChild(allIngredientsDiv);
 document.body.appendChild(productTablesDiv);
 

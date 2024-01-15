@@ -8,14 +8,13 @@ export function generateProductHTML(product) {
 
 // Function to generate HTML list of all product prices
 export function generateProductPriceList(products) {
-    let html = `<hr/><details id="productPriceDetails">
-                    <summary>Produktų kainos</summary>
+    let html = `<div id="productPriceDetails">
                     <ul class="list-group list-group-vertical">`;
     products.forEach(product => {
         html += `<li class="list-group-item">${product.name}: <input class="savedPrice" type="number" value="${product.price}" id="${generateId(product.name, "price")}" /> €</li>`;
     });
     html += `</ul>
-              </details>`;
+              </div>`;
     return html;
 }
 

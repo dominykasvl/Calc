@@ -14,11 +14,36 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light justify-content-center container-fluid" style="background-color: #ead8c0;">
-        <a class="navbar-brand" href="#">
-          <img src="/Calc/logo/logo.jpeg" alt="Logo" class="img-fluid img-thumbnail" style="height:80px;">
+    <nav class="navbar navbar-light justify-content-center container-fluid" style="background-color: #ead8c0;">
+        <div class="container col-4 justify-content-center">
+            <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#priceModal">
+                Redaguoti kainas
+            </button>
+        </div>
+        <a class="navbar-brand justify-content-center" href="#">
+            <img src="/Calc/logo/logo.jpeg" alt="Logo" class="img-fluid img-thumbnail" style="height:80px;">
         </a>
+        <div class="container col-4 justify-content-center">
+            <button id="generate-pdf">Generuoti PDF</button>
+        </div> 
     </nav>
+
+    <div class="modal fade left" id="priceModal" tabindex="-1" role="dialog" aria-labelledby="priceModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+      
+            <div class="modal-header">
+              <h5 class="modal-title" id="priceModalLabel">Produktų kainos</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+      
+            <div id="product-prices" class="modal-body">
+              <!-- Price List -->
+            </div>
+            
+          </div>
+        </div>
+    </div>
 
     <script src="/Calc/plugins/jspdf.umd.min.js"></script>
     <script src="/Calc/plugins/jspdf.plugin.autotable.js"></script>
