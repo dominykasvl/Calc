@@ -39,6 +39,7 @@ export function generateProductIngredientsHTML(product, tableCounter, quantity) 
 function generateTableHTML(product, tableCounter, quantity, localTableCounter) {
     let html = `<div class="col-12 col-lg-6 bg-light border border-4 rounded"> <!-- Add this line -->
                 <h3 class="h3">Ingredientai produktui "${product.name}" (${quantity} vnt.)</h3>
+                <span class="badge bg-danger" style="cursor:pointer;" onclick="this.parentNode.remove();">&#10006;</span>
                 <div class="table-responsive"> <!-- Add this line -->
                     <table class="table table-hover table-bordered table-sm">
                     <caption style="display: none;">Ingredientai produktui "${product.name}" (${quantity} vnt.)</caption>
@@ -61,7 +62,7 @@ function generateTableHTML(product, tableCounter, quantity, localTableCounter) {
 
     html += `</table>
             </div> <!-- Close the table-responsive div -->
-            </div> <!-- Close the col div -->`;
+            </div>`;
 
 
     return html;
