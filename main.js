@@ -10,22 +10,22 @@ document.body.innerHTML += `<hr />`;
 
 // Creating a button row for each product and appending it to the document body
 const buttonRow = document.createElement('div');
-buttonRow.classList.add('container-fluid', 'btn-group', 'flex-column', 'flex-lg-row');
+buttonRow.classList.add('container-fluid', 'row', 'g-3');
 
 products.forEach(product => {
     const productDiv = document.createElement('div');
-    productDiv.classList.add('d-flex', 'flex-column', 'align-items-center', 'mb-2');
+    productDiv.classList.add('col-sm-12', 'col-md-6', 'col-lg-3', 'd-flex', 'flex-column', 'align-items-center', 'mb-2');
 
     const quantityInput = document.createElement('input');
     quantityInput.type = 'number';
     quantityInput.min = '1';
     quantityInput.value = '1';
     quantityInput.id = product.name + 'quantity-input';
-    quantityInput.classList.add('form-control', 'mb-2');
+    quantityInput.classList.add('form-control-sm', 'mb-2', 'text-center', 'w-auto');
 
     const generateButton = document.createElement('button');
     generateButton.textContent = "+ " + product.name;
-    generateButton.classList.add('btn', 'btn-outline-dark');
+    generateButton.classList.add('btn', 'btn-outline-dark', 'w-auto');
 
     generateButton.addEventListener('click', () => {
         const quantity = parseInt(quantityInput.value);
