@@ -174,7 +174,7 @@ allIngredientsDiv.classList.add('container');
 
 const productTablesDiv = document.createElement('div');
 productTablesDiv.id = 'product-tables';
-productTablesDiv.classList.add('container', 'd-grid', 'gap-3');
+productTablesDiv.classList.add('container', 'd-grid', 'gap-3', 'mb-3');
 
 document.body.appendChild(allIngredientsDiv);
 document.body.appendChild(productTablesDiv);
