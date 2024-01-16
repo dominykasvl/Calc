@@ -4,98 +4,104 @@ export const products = [
         name: 'Klasikinė Duona',
         category: 'Duona',
         price: 7,
+        maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 358 },
-            { name: 'закваска', multiplier: 145 },
-            { name: 'вода', multiplier: 220 },
-            { name: 'соль', multiplier: 8.5 }
+            { name: 'мука', multiplier: 358, minQuantity: 2 },
+            { name: 'закваска', multiplier: 145, minQuantity: 2 },
+            { name: 'вода', multiplier: 220, minQuantity: 2 },
+            { name: 'соль', multiplier: 8.5, minQuantity: 2 }
         ]
     },
     {
         name: 'Linų sėklų Duona',
         category: 'Duona',
         price: 8,
+        maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 358 },
-            { name: 'закваска', multiplier: 145 },
-            { name: 'вода', multiplier: 220 },
-            { name: 'соль', multiplier: 8.5 },
-            { name: 'семена', multiplier: 30 }
+            { name: 'мука', multiplier: 358, minQuantity: 2 },
+            { name: 'закваска', multiplier: 145, minQuantity: 2 },
+            { name: 'вода', multiplier: 220, minQuantity: 2 },
+            { name: 'соль', multiplier: 8.5, minQuantity: 2 },
+            { name: 'семена', multiplier: 30, minQuantity: 2 }
         ]
     },
     {
         name: 'Prancūziška Duona',
         category: 'Duona',
         price: 8,
+        maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 330 },
-            { name: 'закваска', multiplier: 135 },
-            { name: 'вода', multiplier: 210 },
-            { name: 'сахар', multiplier: 30 },
-            { name: 'соль', multiplier: 7 },
-            { name: 'масло', multiplier: 20 }
+            { name: 'мука', multiplier: 330, minQuantity: 2 },
+            { name: 'закваска', multiplier: 135, minQuantity: 2 },
+            { name: 'вода', multiplier: 210, minQuantity: 2 },
+            { name: 'сахар', multiplier: 30, minQuantity: 2 },
+            { name: 'соль', multiplier: 7, minQuantity: 2 },
+            { name: 'масло', multiplier: 20, minQuantity: 2 }
         ]
     },
     {
         name: 'Pomidorinė su čederiu Duona',
         category: 'Duona',
         price: 9,
+        maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 358 },
-            { name: 'закваска', multiplier: 145 },
-            { name: 'вода', multiplier: 120 },
-            { name: 'томатный сок', multiplier: 100 },
-            { name: 'соль', multiplier: 7 },
-            { name: 'чеддер', multiplier: 60 }
+            { name: 'мука', multiplier: 358, minQuantity: 2 },
+            { name: 'закваска', multiplier: 145, minQuantity: 2 },
+            { name: 'вода', multiplier: 120, minQuantity: 2 },
+            { name: 'томатный сок', multiplier: 100, minQuantity: 2 },
+            { name: 'соль', multiplier: 7, minQuantity: 2 },
+            { name: 'чеддер', multiplier: 60, minQuantity: 2 }
         ]
     },
     {
         name: 'Karamelizuotų svogūnų Duona',
         category: 'Duona',
         price: 8,
+        maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 358 },
-            { name: 'закваска', multiplier: 145 },
-            { name: 'вода', multiplier: 120 },
-            { name: 'соль', multiplier: 8.5 },
-            { name: 'солод', multiplier: 10 },
-            { name: 'лук', multiplier: 50 },
-            { name: 'сливочное масло', multiplier: 10 }
+            { name: 'мука', multiplier: 358, minQuantity: 2 },
+            { name: 'закваска', multiplier: 145, minQuantity: 2 },
+            { name: 'вода', multiplier: 120, minQuantity: 2 },
+            { name: 'соль', multiplier: 8.5, minQuantity: 2 },
+            { name: 'солод', multiplier: 10, minQuantity: 2 },
+            { name: 'лук', multiplier: 50, minQuantity: 2 },
+            { name: 'сливочное масло', multiplier: 10, minQuantity: 2 }
         ]
     },
     {
         name: 'Babka su šokoladiniu kremu',
         category: 'Babka',
         price: 16,
+        maxProductQuantity: 2,
         ingredients: [
             {
                 name: 'заварка',
                 subIngredients: [
-                    { name: 'мука', multiplier: 50 },
-                    { name: 'вода', multiplier: 120 },
+                    { name: 'мука', multiplier: 50, minQuantity: 2 },
+                    { name: 'вода', multiplier: 120, minQuantity: 2 },
                 ]
             },
             {
                 name: 'тесто',
                 subIngredients: [
-                    { name: 'закваска', multiplier: 120 },
-                    { name: 'молоко', multiplier: 90 },
-                    { name: 'заварка', multiplier: 170 },
-                    { name: 'мука', multiplier: 400 },
-                    { name: 'яйцо', multiplier: 1 },
-                    { name: 'сахар', multiplier: 50 },
-                    { name: 'соль', multiplier: 7 },
-                    { name: 'сливочное масло', multiplier: 60 },
+                    { name: 'закваска', multiplier: 120, minQuantity: 2 },
+                    { name: 'молоко', multiplier: 90, minQuantity: 2 },
+                    { name: 'заварка', multiplier: 170, minQuantity: 2 },
+                    { name: 'мука', multiplier: 400, minQuantity: 2 },
+                    { name: 'яйцо', multiplier: 1, minQuantity: 2 },
+                    { name: 'сахар', multiplier: 50, minQuantity: 2 },
+                    { name: 'соль', multiplier: 7, minQuantity: 2 },
+                    { name: 'сливочное масло', multiplier: 60, minQuantity: 2 },
                 ]
             },
             {
                 name: 'крем',
                 subIngredients: [
-                    { name: 'молоко', multiplier: 200 },
-                    { name: 'яйцо', multiplier: 3 },
-                    { name: 'сахар', multiplier: 70 },
-                    { name: 'мука', multiplier: 30 },
-                    { name: 'темный шоколад 54,5%', multiplier: 80 },
+                    { name: 'молоко', multiplier: 200, minQuantity: 2 },
+                    { name: 'яйцо', multiplier: 3, minQuantity: 2 },
+                    { name: 'сахар', multiplier: 70, minQuantity: 2 },
+                    { name: 'мука', multiplier: 30, minQuantity: 2 },
+                    { name: 'темный шоколад 54,5%', multiplier: 80, minQuantity: 2 },
                 ]
             },
         ]
@@ -104,34 +110,35 @@ export const products = [
         name: 'Babka su aguonomis',
         category: 'Babka',
         price: 14,
+        maxProductQuantity: 2,
         ingredients: [
             {
                 name: 'заварка',
                 subIngredients: [
-                    { name: 'мука', multiplier: 50 },
-                    { name: 'вода', multiplier: 120 },
+                    { name: 'мука', multiplier: 50, minQuantity: 2 },
+                    { name: 'вода', multiplier: 120, minQuantity: 2 },
                 ]
             },
             {
                 name: 'тесто',
                 subIngredients: [
-                    { name: 'закваска', multiplier: 120 },
-                    { name: 'молоко', multiplier: 90 },
-                    { name: 'заварка', multiplier: 170 },
-                    { name: 'мука', multiplier: 400 },
-                    { name: 'яйцо', multiplier: 1 },
-                    { name: 'сахар', multiplier: 50 },
-                    { name: 'соль', multiplier: 7 },
-                    { name: 'сливочное масло', multiplier: 60 },
+                    { name: 'закваска', multiplier: 120, minQuantity: 2 },
+                    { name: 'молоко', multiplier: 90, minQuantity: 2 },
+                    { name: 'заварка', multiplier: 170, minQuantity: 2 },
+                    { name: 'мука', multiplier: 400, minQuantity: 2 },
+                    { name: 'яйцо', multiplier: 1, minQuantity: 2 },
+                    { name: 'сахар', multiplier: 50, minQuantity: 2 },
+                    { name: 'соль', multiplier: 7, minQuantity: 2 },
+                    { name: 'сливочное масло', multiplier: 60, minQuantity: 2 },
                 ]
             },
             {
                 name: 'маковая начинка',
                 subIngredients: [
-                    { name: 'молоко', multiplier: 175 },
-                    { name: 'манка', multiplier: 25 },
-                    { name: 'мак', multiplier: 150 },
-                    { name: 'сахар', multiplier: 70 },
+                    { name: 'молоко', multiplier: 175, minQuantity: 2 },
+                    { name: 'манка', multiplier: 25, minQuantity: 2 },
+                    { name: 'мак', multiplier: 150, minQuantity: 2 },
+                    { name: 'сахар', multiplier: 70, minQuantity: 2 },
                 ]
             },
         ]
@@ -140,25 +147,26 @@ export const products = [
         name: 'Pan Brioche',
         category: 'Brioche',
         price: 8,
+        maxProductQuantity: 2,
         ingredients: [
             {
                 name: 'заварка',
                 subIngredients: [
-                    { name: 'мука', multiplier: 50 },
-                    { name: 'вода', multiplier: 120 },
+                    { name: 'мука', multiplier: 50, minQuantity: 2 },
+                    { name: 'вода', multiplier: 120, minQuantity: 2 },
                 ]
             },
             {
                 name: 'тесто',
                 subIngredients: [
-                    { name: 'закваска', multiplier: 120 },
-                    { name: 'молоко', multiplier: 90 },
-                    { name: 'заварка', multiplier: 170 },
-                    { name: 'мука', multiplier: 400 },
-                    { name: 'яйцо', multiplier: 1 },
-                    { name: 'сахар', multiplier: 50 },
-                    { name: 'соль', multiplier: 7 },
-                    { name: 'сливочное масло', multiplier: 60 },
+                    { name: 'закваска', multiplier: 120, minQuantity: 2 },
+                    { name: 'молоко', multiplier: 90, minQuantity: 2 },
+                    { name: 'заварка', multiplier: 170, minQuantity: 2 },
+                    { name: 'мука', multiplier: 400, minQuantity: 2 },
+                    { name: 'яйцо', multiplier: 1, minQuantity: 2 },
+                    { name: 'сахар', multiplier: 50, minQuantity: 2 },
+                    { name: 'соль', multiplier: 7, minQuantity: 2 },
+                    { name: 'сливочное масло', multiplier: 60, minQuantity: 2 },
                 ]
             },
         ]
@@ -167,34 +175,35 @@ export const products = [
         name: 'Cinnabons su citrininiu kremu',
         category: 'Cinnabons',
         price: 8,
+        maxProductQuantity: 2,
         ingredients: [
             {
                 name: 'тесто',
                 subIngredients: [
-                    { name: 'мука', multiplier: 250 },
-                    { name: 'яйцо', multiplier: 1 },
-                    { name: 'дрожжи', multiplier: 2 },
-                    { name: 'вода', multiplier: 110 },
-                    { name: 'сахар', multiplier: 30 },
-                    { name: 'масло', multiplier: 20 },
-                    { name: 'соль', multiplier: 2 },
+                    { name: 'мука', multiplier: 250, minQuantity: 2 },
+                    { name: 'яйцо', multiplier: 1, minQuantity: 2 },
+                    { name: 'дрожжи', multiplier: 2, minQuantity: 2 },
+                    { name: 'вода', multiplier: 110, minQuantity: 2 },
+                    { name: 'сахар', multiplier: 30, minQuantity: 2 },
+                    { name: 'масло', multiplier: 20, minQuantity: 2 },
+                    { name: 'соль', multiplier: 2, minQuantity: 2 },
                 ]
             },
             {
                 name: 'крем',
                 subIngredients: [
-                    { name: 'кремчиз', multiplier: 200 },
-                    { name: 'сахарная пудра', multiplier: 100 },
-                    { name: 'лимон', multiplier: 1 },
+                    { name: 'кремчиз', multiplier: 200, minQuantity: 2 },
+                    { name: 'сахарная пудра', multiplier: 100, minQuantity: 2 },
+                    { name: 'лимон', multiplier: 1, minQuantity: 2 },
                 ]
             },
             {
                 name: 'масло корицы',
                 subIngredients: [
-                    { name: 'масло', multiplier: 100 },
-                    { name: 'корица', multiplier: 20 },
-                    { name: 'крахмал', multiplier: 15 },
-                    { name: 'сахар', multiplier: 80 },
+                    { name: 'масло', multiplier: 100, minQuantity: 2 },
+                    { name: 'корица', multiplier: 20, minQuantity: 2 },
+                    { name: 'крахмал', multiplier: 15, minQuantity: 2 },
+                    { name: 'сахар', multiplier: 80, minQuantity: 2 },
                 ]
             },
         ]

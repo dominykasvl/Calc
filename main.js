@@ -13,11 +13,23 @@ const buttonRow = document.createElement('div');
 buttonRow.classList.add('container-fluid', 'btn-group', 'flex-column', 'flex-lg-row');
 
 products.forEach(product => {
+    const productDiv = document.createElement('div');
+    productDiv.classList.add('d-flex', 'flex-column', 'align-items-center', 'mb-2');
+
+    const quantityInput = document.createElement('input');
+    quantityInput.type = 'number';
+    quantityInput.min = '1';
+    quantityInput.value = '1';
+    quantityInput.id = product.name + 'quantity-input';
+    quantityInput.classList.add('form-control', 'mb-2');
+
     const generateButton = document.createElement('button');
     generateButton.textContent = "+ " + product.name;
     generateButton.classList.add('btn', 'btn-outline-dark');
+
     generateButton.addEventListener('click', () => {
-        const productIngredientsHTML = generateProductIngredientsHTML(product, tableCounter);
+        const quantity = parseInt(quantityInput.value);
+        const productIngredientsHTML = generateProductIngredientsHTML(product, tableCounter, quantity);
         const categoryDivId = product.category.toLowerCase().replace(/\s/g, '-');
         const categoryDiv = document.getElementById(categoryDivId);
         if (categoryDiv) {
@@ -33,7 +45,9 @@ products.forEach(product => {
         onTableUpdate();
     });
 
-    buttonRow.appendChild(generateButton);
+    productDiv.appendChild(quantityInput);
+    productDiv.appendChild(generateButton);
+    buttonRow.appendChild(productDiv);
 });
 
 // Append the button row to the document body
@@ -213,7 +227,7 @@ window.onload = function () {
     }
 
     // Save the state to Local Storage whenever it changes
-    details.addEventListener('toggle', function() {
+    details.addEventListener('toggle', function () {
         localStorage.setItem('productPriceDetails', details.open);
     });
 }

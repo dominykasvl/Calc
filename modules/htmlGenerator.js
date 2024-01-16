@@ -19,10 +19,25 @@ export function generateProductPriceList(products) {
 }
 
 // Function to generate HTML for a product's ingredients
-export function generateProductIngredientsHTML(product, tableCounter) {
-    let html = `<h3 class="h3">Ingredientai produktui "${product.name}"</h3>
+export function generateProductIngredientsHTML(product, tableCounter, quantity) {
+    let html = '';
+    const maxQuantity = product.maxProductQuantity || quantity;
+    let remainingQuantity = quantity;
+
+    while (remainingQuantity > 0) {
+        const currentQuantity = Math.min(maxQuantity, remainingQuantity);
+        html += generateTableHTML(product, tableCounter, currentQuantity);
+        remainingQuantity -= currentQuantity;
+        tableCounter++;
+    }
+
+    return html;
+}
+
+function generateTableHTML(product, tableCounter, quantity) {
+    let html = `<h3 class="h3">Ingredientai produktui "${product.name}" (${quantity} vnt.)</h3>
                 <table class="table table-hover table-bordered table-sm">
-                <caption style="display: none;">Ingredientai produktui "${product.name}"</caption>
+                <caption style="display: none;">Ingredientai produktui "${product.name}" (${quantity} vnt.)</caption>
                 <tr class="table-dark">
                     <th>Kaina</th>
                     <th><input type="number" value="${getProductPriceFromTable(generateId(product.name, "price"))}" class="price" id="${generateId(product.name, "price", tableCounter)}" /> €</li></th>
@@ -37,13 +52,14 @@ export function generateProductIngredientsHTML(product, tableCounter) {
     const colors = ['red', 'blue', 'green', 'darkgoldenrod', 'purple', 'orange', 'pink', 'brown', 'gray', 'cyan', 'magenta', 'teal', 'lime', 'indigo']; // Add more colors if needed
 
     product.ingredients.forEach(ingredient => {
-        html += generateIngredientHTML(ingredient, product, tableCounter, subIngredientColors, colors);
+        html += generateIngredientHTML(ingredient, product, tableCounter, subIngredientColors, colors, quantity);
     });
 
     html += `</table>`;
 
     return html;
 }
+
 function getProductPriceFromTable(productId) {
     const inputElement = document.getElementById(productId);
     if (inputElement) {
@@ -52,8 +68,15 @@ function getProductPriceFromTable(productId) {
     return null;
 }
 
-function generateIngredientHTML(ingredient, product, tableCounter, subIngredientColors, colors) {
+function generateIngredientHTML(ingredient, product, tableCounter, subIngredientColors, colors, quantity) {
     let html = '';
+
+    let multiplier = ingredient.multiplier;
+    if (ingredient.minQuantity && ingredient.minQuantity >= quantity) {
+        multiplier *= ingredient.minQuantity;
+    } else {
+        multiplier *= quantity;
+    }
 
     if (ingredient.subIngredients) {
         html += `<tr class="table-secondary">
@@ -62,28 +85,35 @@ function generateIngredientHTML(ingredient, product, tableCounter, subIngredient
         </tr>`;
 
         ingredient.subIngredients.forEach(subIngredient => {
-            html += generateSubIngredientHTML(subIngredient, ingredient, product, tableCounter, subIngredientColors, colors);
+            html += generateSubIngredientHTML(subIngredient, ingredient, product, tableCounter, subIngredientColors, colors, quantity);
         });
     } else {
         html += `<tr>
         <td>${ingredient.name}</td>
-        <td><input type="number" id="${generateId(product.name, ingredient.name, tableCounter)}" value="${ingredient.multiplier}" /></td>
+        <td><input type="number" id="${generateId(product.name, ingredient.name, tableCounter)}" value="${multiplier}" /></td>
         </tr>`;
     }
 
     return html;
 }
 
-function generateSubIngredientHTML(subIngredient, ingredient, product, tableCounter, subIngredientColors, colors) {
+function generateSubIngredientHTML(subIngredient, ingredient, product, tableCounter, subIngredientColors, colors, quantity) {
     if (!subIngredientColors[subIngredient.name]) {
         subIngredientColors[subIngredient.name] = colors[Object.keys(subIngredientColors).length % colors.length];
     }
 
     const color = subIngredientColors[subIngredient.name];
 
+    let multiplier = subIngredient.multiplier;
+    if (subIngredient.minQuantity && subIngredient.minQuantity >= quantity) {
+        multiplier *= subIngredient.minQuantity;
+    } else {
+        multiplier *= quantity;
+    }
+
     return `<tr style="color: ${color};">
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${subIngredient.name}</td>
-            <td><input type="number" id="${generateId(product.name, ingredient.name, subIngredient.name, tableCounter)}" value="${subIngredient.multiplier}" /></td>
+            <td><input type="number" id="${generateId(product.name, ingredient.name, subIngredient.name, tableCounter)}" value="${multiplier}" /></td>
             </tr>`;
 }
 
