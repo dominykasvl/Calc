@@ -92,7 +92,7 @@ function generateIngredientHTML(ingredient, product, tableCounter, subIngredient
         </tr>`;
 
         ingredient.subIngredients.forEach(subIngredient => {
-            html += generateSubIngredientHTML(subIngredient, ingredient, product, tableCounter, subIngredientColors, colors, quantity);
+            html += generateSubIngredientHTML(subIngredient, ingredient, product, tableCounter, subIngredientColors, colors, quantity, localTableCounter);
         });
     } else {
         html += `<tr>
