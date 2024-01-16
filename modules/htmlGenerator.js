@@ -23,18 +23,20 @@ export function generateProductIngredientsHTML(product, tableCounter, quantity) 
     let html = '';
     const maxQuantity = product.maxProductQuantity || quantity;
     let remainingQuantity = quantity;
+    let localTableCounter = 0; // Add this line
 
     while (remainingQuantity > 0) {
         const currentQuantity = Math.min(maxQuantity, remainingQuantity);
-        html += generateTableHTML(product, tableCounter, currentQuantity);
+        html += generateTableHTML(product, tableCounter, currentQuantity, localTableCounter); // Modify this line
         remainingQuantity -= currentQuantity;
         tableCounter++;
+        localTableCounter++; // Add this line
     }
 
     return html;
 }
 
-function generateTableHTML(product, tableCounter, quantity) {
+function generateTableHTML(product, tableCounter, quantity, localTableCounter) {
     let html = `<div class="col-12 col-lg-6 bg-light border border-4 rounded"> <!-- Add this line -->
                 <h3 class="h3">Ingredientai produktui "${product.name}" (${quantity} vnt.)</h3>
                 <div class="table-responsive"> <!-- Add this line -->
@@ -54,7 +56,7 @@ function generateTableHTML(product, tableCounter, quantity) {
     const colors = ['red', 'blue', 'green', 'darkgoldenrod', 'purple', 'orange', 'pink', 'brown', 'gray', 'cyan', 'magenta', 'teal', 'lime', 'indigo']; // Add more colors if needed
 
     product.ingredients.forEach(ingredient => {
-        html += generateIngredientHTML(ingredient, product, tableCounter, subIngredientColors, colors, quantity);
+        html += generateIngredientHTML(ingredient, product, tableCounter, subIngredientColors, colors, quantity, localTableCounter); // Modify this line
     });
 
     html += `</table>
@@ -73,11 +75,11 @@ function getProductPriceFromTable(productId) {
     return null;
 }
 
-function generateIngredientHTML(ingredient, product, tableCounter, subIngredientColors, colors, quantity) {
+function generateIngredientHTML(ingredient, product, tableCounter, subIngredientColors, colors, quantity, localTableCounter) {
     let html = '';
 
     let multiplier = ingredient.multiplier;
-    if (ingredient.minQuantity && ingredient.minQuantity >= quantity) {
+    if (localTableCounter === 0 && ingredient.minQuantity && ingredient.minQuantity >= quantity) { // Modify this line
         multiplier *= ingredient.minQuantity;
     } else {
         multiplier *= quantity;
@@ -102,7 +104,7 @@ function generateIngredientHTML(ingredient, product, tableCounter, subIngredient
     return html;
 }
 
-function generateSubIngredientHTML(subIngredient, ingredient, product, tableCounter, subIngredientColors, colors, quantity) {
+function generateSubIngredientHTML(subIngredient, ingredient, product, tableCounter, subIngredientColors, colors, quantity, localTableCounter) {
     if (!subIngredientColors[subIngredient.name]) {
         subIngredientColors[subIngredient.name] = colors[Object.keys(subIngredientColors).length % colors.length];
     }
@@ -110,7 +112,7 @@ function generateSubIngredientHTML(subIngredient, ingredient, product, tableCoun
     const color = subIngredientColors[subIngredient.name];
 
     let multiplier = subIngredient.multiplier;
-    if (subIngredient.minQuantity && subIngredient.minQuantity >= quantity) {
+    if (localTableCounter === 0 && subIngredient.minQuantity && subIngredient.minQuantity >= quantity) { // Modify this line
         multiplier *= subIngredient.minQuantity;
     } else {
         multiplier *= quantity;
