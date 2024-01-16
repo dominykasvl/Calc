@@ -14,18 +14,21 @@ buttonRow.classList.add('container-fluid', 'row', 'g-3');
 
 products.forEach(product => {
     const productDiv = document.createElement('div');
-    productDiv.classList.add('col-sm-12', 'col-md-6', 'col-lg-3', 'd-flex', 'flex-column', 'align-items-center', 'mb-2');
+    productDiv.classList.add('col-6', 'col-sm-3', 'col-md-3', 'col-lg-2', 'd-flex', 'flex-column', 'align-items-center', 'mb-2');
+
+    const inputButtonContainer = document.createElement('div'); // New container for input and button
+    inputButtonContainer.classList.add('w-100', 'p-1', 'd-flex', 'flex-column', 'align-items-stretch', 'border', 'border-2', 'rounded');
 
     const quantityInput = document.createElement('input');
     quantityInput.type = 'number';
     quantityInput.min = '1';
     quantityInput.value = '1';
     quantityInput.id = product.name + 'quantity-input';
-    quantityInput.classList.add('form-control-sm', 'mb-2', 'text-center', 'w-auto');
+    quantityInput.classList.add('form-control-sm', 'mb-2', 'text-center', 'w-100', 'p-0'); // Full width, no padding
 
     const generateButton = document.createElement('button');
     generateButton.textContent = "+ " + product.name;
-    generateButton.classList.add('btn', 'btn-outline-dark', 'w-auto');
+    generateButton.classList.add('btn', 'btn-outline-dark', 'w-100', 'p-0'); // Full width, no padding
 
     generateButton.addEventListener('click', () => {
         const quantity = parseInt(quantityInput.value);
@@ -45,8 +48,9 @@ products.forEach(product => {
         onTableUpdate();
     });
 
-    productDiv.appendChild(quantityInput);
-    productDiv.appendChild(generateButton);
+    inputButtonContainer.appendChild(quantityInput); // Append input to the new container
+    inputButtonContainer.appendChild(generateButton); // Append button to the new container
+    productDiv.appendChild(inputButtonContainer); // Append the new container to the productDiv
     buttonRow.appendChild(productDiv);
 });
 
