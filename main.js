@@ -36,11 +36,20 @@ products.forEach(product => {
         const categoryDivId = product.category.toLowerCase().replace(/\s/g, '-');
         const categoryDiv = document.getElementById(categoryDivId);
         if (categoryDiv) {
-            categoryDiv.insertAdjacentHTML('beforeend', productIngredientsHTML);
+            categoryDiv.querySelector('.collapse').querySelector('.card-body').querySelector('.row').insertAdjacentHTML('beforeend', productIngredientsHTML);
         } else {
             const newCategoryDiv = document.createElement('div');
             newCategoryDiv.id = categoryDivId;
-            newCategoryDiv.innerHTML = `<h2>${product.category}</h2>` + productIngredientsHTML; // Fix: Append productIngredientsHTML as innerHTML
+            newCategoryDiv.classList.add('d-grid');
+            newCategoryDiv.innerHTML = `
+                <button class="btn btn-secondary btn-block" type="button" data-bs-toggle="collapse" data-bs-target="#${categoryDivId}-content" aria-expanded="false" aria-controls="${categoryDivId}-content">
+                    ${product.category}
+                </button>
+                <div class="collapse" id="${categoryDivId}-content">
+                    <div class="card card-body" style="background-color: #ead8c0;">
+                        <div class="row">${productIngredientsHTML}</div>
+                    </div>
+                </div>`;
             productTablesDiv.appendChild(newCategoryDiv);
         }
         tableCounter++;
@@ -164,7 +173,7 @@ allIngredientsDiv.classList.add('container');
 
 const productTablesDiv = document.createElement('div');
 productTablesDiv.id = 'product-tables';
-productTablesDiv.classList.add('container');
+productTablesDiv.classList.add('container', 'd-grid', 'gap-3');
 
 document.body.appendChild(allIngredientsDiv);
 document.body.appendChild(productTablesDiv);

@@ -35,17 +35,19 @@ export function generateProductIngredientsHTML(product, tableCounter, quantity) 
 }
 
 function generateTableHTML(product, tableCounter, quantity) {
-    let html = `<h3 class="h3">Ingredientai produktui "${product.name}" (${quantity} vnt.)</h3>
-                <table class="table table-hover table-bordered table-sm">
-                <caption style="display: none;">Ingredientai produktui "${product.name}" (${quantity} vnt.)</caption>
-                <tr class="table-dark">
-                    <th>Kaina</th>
-                    <th><input type="number" value="${getProductPriceFromTable(generateId(product.name, "price"))}" class="price" id="${generateId(product.name, "price", tableCounter)}" /> €</li></th>
-                </tr>
-                <tr class="table-dark">
-                    <th>Ingredientai</th>
-                    <th>Kiekis vienam vnt. / g.</th>
-                </tr>`;
+    let html = `<div class="col-12 col-lg-6 bg-light border border-4 rounded"> <!-- Add this line -->
+                <h3 class="h3">Ingredientai produktui "${product.name}" (${quantity} vnt.)</h3>
+                <div class="table-responsive"> <!-- Add this line -->
+                    <table class="table table-hover table-bordered table-sm">
+                    <caption style="display: none;">Ingredientai produktui "${product.name}" (${quantity} vnt.)</caption>
+                    <tr class="table-dark">
+                        <th>Kaina</th>
+                        <th><input type="number" value="${getProductPriceFromTable(generateId(product.name, "price"))}" class="price" id="${generateId(product.name, "price", tableCounter)}" /> €</li></th>
+                    </tr>
+                    <tr class="table-dark">
+                        <th>Ingredientai</th>
+                        <th>Kiekis vienam vnt. / g.</th>
+                    </tr>`;
 
     // Dictionary to store sub-ingredient colors
     const subIngredientColors = {};
@@ -55,7 +57,10 @@ function generateTableHTML(product, tableCounter, quantity) {
         html += generateIngredientHTML(ingredient, product, tableCounter, subIngredientColors, colors, quantity);
     });
 
-    html += `</table>`;
+    html += `</table>
+            </div> <!-- Close the table-responsive div -->
+            </div> <!-- Close the col div -->`;
+
 
     return html;
 }
