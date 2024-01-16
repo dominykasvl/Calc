@@ -44,6 +44,7 @@ products.forEach(product => {
             newCategoryDiv.innerHTML = `
                 <button class="btn btn-secondary btn-block" type="button" data-bs-toggle="collapse" data-bs-target="#${categoryDivId}-content" aria-expanded="false" aria-controls="${categoryDivId}-content">
                     ${product.category}
+                    <span class="badge bg-primary">&#8595;</span>
                 </button>
                 <div class="collapse" id="${categoryDivId}-content">
                     <div class="card card-body" style="background-color: #ead8c0;">
