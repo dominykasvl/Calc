@@ -37,15 +37,18 @@ export function generateProductIngredientsHTML(product, tableCounter, quantity) 
 }
 
 function generateTableHTML(product, tableCounter, quantity, localTableCounter) {
-    let html = `<div class="col-12 col-lg-6 bg-light border border-4 rounded"> <!-- Add this line -->
+    let productPrice = getProductPriceFromTable(generateId(product.name, "price"));
+    let totalProductPrice = productPrice * quantity;
+
+    let html = `<div class="col-12 col-lg-6 bg-light border border-4 rounded">
                 <h3 class="h3">Ingredientai produktui "${product.name}" (${quantity} vnt.)</h3>
                 <span class="badge bg-danger" style="cursor:pointer;" onclick="this.parentNode.remove();">&#10006;</span>
-                <div class="table-responsive"> <!-- Add this line -->
+                <div class="table-responsive">
                     <table class="table table-hover table-bordered table-sm">
                     <caption style="display: none;">Ingredientai produktui "${product.name}" (${quantity} vnt.)</caption>
                     <tr class="table-dark">
                         <th>Kaina</th>
-                        <th><input type="number" value="${getProductPriceFromTable(generateId(product.name, "price"))}" class="price" id="${generateId(product.name, "price", tableCounter)}" /> €</li></th>
+                        <th><input type="number" value="${totalProductPrice}" class="price" id="${generateId(product.name, "price", tableCounter)}" /> €</li></th>
                     </tr>
                     <tr class="table-dark">
                         <th>Ingredientai</th>
