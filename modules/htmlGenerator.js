@@ -122,7 +122,7 @@ function generateSubIngredientHTML(subIngredient, ingredient, product, tableCoun
         multiplier *= quantity;
     }
 
-    return `<tr style="color: ${color};">
+    return `<tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${subIngredient.name}</td>
             <td><input type="number" id="${generateId(product.name, ingredient.name, subIngredient.name, tableCounter)}" value="${multiplier}" /></td>
             </tr>`;
