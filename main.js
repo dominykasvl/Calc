@@ -242,6 +242,30 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
   return new bootstrap.Popover(popoverTriggerEl);
 });
 
+// Initialize listeners for price change
+document.querySelectorAll('.savedPrice').forEach(input => {
+    const handleChange = function() {
+        // Create alert
+        const alert = document.createElement('div');
+        alert.className = 'alert alert-warning position-fixed top-0 end-0 alert-dismissible fade show';
+        alert.style.zIndex = 9999; // Ensure the alert is above all other elements
+        alert.innerHTML = '<button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Kaina pakeista!</strong> Pastaba: naujos kainos galios naujiems pridėtiems produktams.';
+
+        // Append alert to body
+        document.body.appendChild(alert);
+
+        // Remove alert after 3 seconds
+        setTimeout(() => {
+            alert.querySelector('.btn-close').click();
+        }, 5000);
+
+        // Remove this event listener so the alert only happens once
+        this.removeEventListener('change', handleChange);
+    };
+
+    input.addEventListener('change', handleChange);
+});
+
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
         navigator.serviceWorker.register('/Calc/service-worker.js').then(function (registration) {
