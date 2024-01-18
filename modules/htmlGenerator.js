@@ -40,9 +40,9 @@ function generateTableHTML(product, tableCounter, quantity, localTableCounter) {
     let productPrice = getProductPriceFromTable(generateId(product.name, "price"));
     let totalProductPrice = productPrice * quantity;
 
-    let html = `<div class="col-12 col-lg-6 bg-light border border-4 rounded">
+    let html = `<div class="col-12 col-lg-6 bg-light border border-4 rounded" id="table-${tableCounter}">
                 <h3 class="h3">Ingredientai produktui "${product.name}" (${quantity} vnt.)</h3>
-                <span class="badge bg-danger" style="cursor:pointer;" onclick="this.parentNode.remove();">&#10006;</span>
+                <span class="badge bg-danger" style="cursor:pointer;" onclick="window.deleteTable('table-${tableCounter}');">&#10006;</span>
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered table-sm">
                     <caption style="display: none;">Ingredientai produktui "${product.name}" (${quantity} vnt.)</caption>
@@ -69,6 +69,30 @@ function generateTableHTML(product, tableCounter, quantity, localTableCounter) {
 
 
     return html;
+}
+
+window.deleteTable = function(tableId) {
+    // Remove the table from the DOM
+    const table = document.getElementById(tableId);
+    table.parentNode.removeChild(table);
+
+    // Get the stored HTML from sessionStorage
+    let storedHTML = sessionStorage.getItem('productTables');
+
+    // Create a temporary div to hold the stored HTML
+    let tempDiv = document.createElement('div');
+    tempDiv.innerHTML = storedHTML;
+
+    // Find the table to remove in the stored HTML
+    let tableToRemove = tempDiv.querySelector(`#${tableId}`);
+
+    // Remove the table from the stored HTML
+    if (tableToRemove) {
+        tableToRemove.parentNode.removeChild(tableToRemove);
+    }
+
+    // Store the updated HTML back into sessionStorage
+    sessionStorage.setItem('productTables', tempDiv.innerHTML);
 }
 
 function getProductPriceFromTable(productId) {
