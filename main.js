@@ -193,6 +193,11 @@ const datePicker = document.createElement('input');
 datePicker.type = 'date';
 datePicker.id = 'pdf-time';
 datePicker.classList.add('form-control');
+datePicker.setAttribute('data-bs-toggle', 'popover');
+datePicker.setAttribute('data-bs-placement', 'top');
+datePicker.setAttribute('data-bs-trigger', 'hover');
+datePicker.setAttribute('data-bs-content', 'Ši data bus matoma PDF faile.');
+datePicker.setAttribute('title', 'Pastaba:');
 
 const datePickerLabel = document.createElement('label');
 datePickerLabel.setAttribute('for', 'pdf-time');
