@@ -186,6 +186,11 @@ datePicker.type = 'date';
 datePicker.id = 'pdf-time';
 datePicker.classList.add('form-control');
 
+const datePickerLabel = document.createElement('label');
+datePickerLabel.setAttribute('for', 'pdf-time');
+datePickerLabel.textContent = 'Data:';
+datePickerLabel.classList.add('form-label');
+
 // Get the current date
 const today = new Date();
 // Format the date in the yyyy-mm-dd format
@@ -195,13 +200,19 @@ datePicker.value = formattedDate;
 
 // Create a Bootstrap grid row and column to hold the date picker
 const datePickerRow = document.createElement('div');
-datePickerRow.classList.add('row', 'justify-content-center', 'mb-3');
+datePickerRow.classList.add('row', 'justify-content-center', 'mb-3', 'align-items-center', 'flex-column', 'flex-sm-row');
+
+// Create a Bootstrap grid column for the label
+const labelCol = document.createElement('div');
+labelCol.classList.add('col-12', 'col-sm-2', 'text-center', 'text-sm-end'); // Add 'text-center' and 'text-sm-end' classes to center the text on small screens and align it to the right on larger screens
+labelCol.appendChild(datePickerLabel);
 
 const datePickerCol = document.createElement('div');
-datePickerCol.classList.add('col-sm-3');
+datePickerCol.classList.add('col-12', 'col-sm-3');
+datePickerCol.appendChild(datePicker);
 
 // Append the date picker to the column, and the column to the row
-datePickerCol.appendChild(datePicker);
+datePickerRow.appendChild(labelCol);
 datePickerRow.appendChild(datePickerCol);
 
 // Append the row to the body
