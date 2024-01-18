@@ -180,6 +180,32 @@ const productTablesDiv = document.createElement('div');
 productTablesDiv.id = 'product-tables';
 productTablesDiv.classList.add('container', 'd-grid', 'gap-3', 'mb-3');
 
+// Create a date picker
+const datePicker = document.createElement('input');
+datePicker.type = 'date';
+datePicker.id = 'pdf-time';
+datePicker.classList.add('form-control');
+
+// Get the current date
+const today = new Date();
+// Format the date in the yyyy-mm-dd format
+const formattedDate = today.toISOString().split('T')[0];
+// Set the value of the date picker to the current date
+datePicker.value = formattedDate;
+
+// Create a Bootstrap grid row and column to hold the date picker
+const datePickerRow = document.createElement('div');
+datePickerRow.classList.add('row', 'justify-content-center', 'mb-3');
+
+const datePickerCol = document.createElement('div');
+datePickerCol.classList.add('col-sm-3');
+
+// Append the date picker to the column, and the column to the row
+datePickerCol.appendChild(datePicker);
+datePickerRow.appendChild(datePickerCol);
+
+// Append the row to the body
+document.body.appendChild(datePickerRow);
 document.body.appendChild(allIngredientsDiv);
 document.body.appendChild(productTablesDiv);
 

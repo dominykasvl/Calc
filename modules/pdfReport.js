@@ -19,12 +19,22 @@ export function createPdfButton() {
         doc.addFont("myfont.ttf", "myfont", "normal");
         doc.setFont("myfont");
 
-        // Add current date
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        today = yyyy + '-' + mm + '-' + dd;
+        // Get the date from the HTML element with id "pdf-time"
+        var dateElement = document.getElementById('pdf-time');
+        var today;
+
+        if (dateElement && dateElement.value) {
+            // If the element exists and its value is not empty, use its value
+            today = dateElement.value;
+        } else {
+            // Otherwise, use the current date
+            var date = new Date();
+            var dd = String(date.getDate()).padStart(2, '0');
+            var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = date.getFullYear();
+            today = yyyy + '-' + mm + '-' + dd;
+        }
+
         doc.text(today, 5, 7);
 
         // Calculate sum total of product prices
