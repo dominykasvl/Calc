@@ -33,7 +33,7 @@ export function generateProductIngredientsHTML(product, tableCounter, quantity) 
         localTableCounter++; // Add this line
     }
 
-    return html;
+    return { html, tableCounter };
 }
 
 function generateTableHTML(product, tableCounter, quantity, localTableCounter) {
@@ -82,11 +82,11 @@ function getProductPriceFromTable(productId) {
 function generateIngredientHTML(ingredient, product, tableCounter, subIngredientColors, colors, quantity, localTableCounter) {
     let html = '';
 
-    let multiplier = ingredient.multiplier;
+    let multiplier;
     if (localTableCounter === 0 && ingredient.minQuantity && ingredient.minQuantity >= quantity) { // Modify this line
-        multiplier *= ingredient.minQuantity;
+        multiplier = ingredient.multiplier;
     } else {
-        multiplier *= quantity;
+        multiplier = (ingredient.multiplier / ingredient.minQuantity) * quantity;
     }
 
     if (ingredient.subIngredients) {
@@ -115,11 +115,11 @@ function generateSubIngredientHTML(subIngredient, ingredient, product, tableCoun
 
     const color = subIngredientColors[subIngredient.name];
 
-    let multiplier = subIngredient.multiplier;
+    let multiplier;
     if (localTableCounter === 0 && subIngredient.minQuantity && subIngredient.minQuantity >= quantity) { // Modify this line
-        multiplier *= subIngredient.minQuantity;
+        multiplier = subIngredient.multiplier;
     } else {
-        multiplier *= quantity;
+        multiplier = (subIngredient.multiplier / subIngredient.minQuantity) * quantity;
     }
 
     return `<tr>

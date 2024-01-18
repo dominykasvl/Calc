@@ -32,7 +32,11 @@ products.forEach(product => {
 
     generateButton.addEventListener('click', () => {
         const quantity = parseInt(quantityInput.value);
-        const productIngredientsHTML = generateProductIngredientsHTML(product, tableCounter, quantity);
+
+        const result = generateProductIngredientsHTML(product, tableCounter, quantity);
+        const productIngredientsHTML = result.html;
+        tableCounter = result.tableCounter;
+
         const categoryDivId = product.category.toLowerCase().replace(/\s/g, '-');
         const categoryDiv = document.getElementById(categoryDivId);
         if (categoryDiv) {

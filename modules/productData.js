@@ -6,10 +6,10 @@ export const products = [
         price: 7,
         maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 358, minQuantity: 2 },
-            { name: 'закваска', multiplier: 145, minQuantity: 2 },
-            { name: 'вода', multiplier: 220, minQuantity: 2 },
-            { name: 'соль', multiplier: 8.5, minQuantity: 2 }
+            { name: 'мука', multiplier: 358, minQuantity: 1 },
+            { name: 'закваска', multiplier: 145, minQuantity: 1 },
+            { name: 'вода', multiplier: 220, minQuantity: 1 },
+            { name: 'соль', multiplier: 8.5, minQuantity: 1 }
         ]
     },
     {
@@ -18,11 +18,11 @@ export const products = [
         price: 8,
         maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 358, minQuantity: 2 },
-            { name: 'закваска', multiplier: 145, minQuantity: 2 },
-            { name: 'вода', multiplier: 220, minQuantity: 2 },
-            { name: 'соль', multiplier: 8.5, minQuantity: 2 },
-            { name: 'семена', multiplier: 30, minQuantity: 2 }
+            { name: 'мука', multiplier: 358, minQuantity: 1 },
+            { name: 'закваска', multiplier: 145, minQuantity: 1 },
+            { name: 'вода', multiplier: 220, minQuantity: 1 },
+            { name: 'соль', multiplier: 8.5, minQuantity: 1 },
+            { name: 'семена', multiplier: 30, minQuantity: 1 }
         ]
     },
     {
@@ -31,12 +31,12 @@ export const products = [
         price: 8,
         maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 330, minQuantity: 2 },
-            { name: 'закваска', multiplier: 135, minQuantity: 2 },
-            { name: 'вода', multiplier: 210, minQuantity: 2 },
-            { name: 'сахар', multiplier: 30, minQuantity: 2 },
-            { name: 'соль', multiplier: 7, minQuantity: 2 },
-            { name: 'масло', multiplier: 20, minQuantity: 2 }
+            { name: 'мука', multiplier: 330, minQuantity: 1 },
+            { name: 'закваска', multiplier: 135, minQuantity: 1 },
+            { name: 'вода', multiplier: 210, minQuantity: 1 },
+            { name: 'сахар', multiplier: 30, minQuantity: 1 },
+            { name: 'соль', multiplier: 7, minQuantity: 1 },
+            { name: 'масло', multiplier: 20, minQuantity: 1 }
         ]
     },
     {
@@ -45,12 +45,12 @@ export const products = [
         price: 9,
         maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 358, minQuantity: 2 },
-            { name: 'закваска', multiplier: 145, minQuantity: 2 },
-            { name: 'вода', multiplier: 120, minQuantity: 2 },
-            { name: 'томатный сок', multiplier: 100, minQuantity: 2 },
-            { name: 'соль', multiplier: 7, minQuantity: 2 },
-            { name: 'чеддер', multiplier: 60, minQuantity: 2 }
+            { name: 'мука', multiplier: 358, minQuantity: 1 },
+            { name: 'закваска', multiplier: 145, minQuantity: 1 },
+            { name: 'вода', multiplier: 120, minQuantity: 1 },
+            { name: 'томатный сок', multiplier: 100, minQuantity: 1 },
+            { name: 'соль', multiplier: 7, minQuantity: 1 },
+            { name: 'чеддер', multiplier: 60, minQuantity: 1 }
         ]
     },
     {
@@ -59,13 +59,13 @@ export const products = [
         price: 8,
         maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 358, minQuantity: 2 },
-            { name: 'закваска', multiplier: 145, minQuantity: 2 },
-            { name: 'вода', multiplier: 120, minQuantity: 2 },
-            { name: 'соль', multiplier: 8.5, minQuantity: 2 },
-            { name: 'солод', multiplier: 10, minQuantity: 2 },
-            { name: 'лук', multiplier: 50, minQuantity: 2 },
-            { name: 'сливочное масло', multiplier: 10, minQuantity: 2 }
+            { name: 'мука', multiplier: 358, minQuantity: 1 },
+            { name: 'закваска', multiplier: 145, minQuantity: 1 },
+            { name: 'вода', multiplier: 120, minQuantity: 1 },
+            { name: 'соль', multiplier: 8.5, minQuantity: 1 },
+            { name: 'солод', multiplier: 10, minQuantity: 1 },
+            { name: 'лук', multiplier: 50, minQuantity: 1 },
+            { name: 'сливочное масло', multiplier: 10, minQuantity: 1 }
         ]
     },
     {
@@ -77,31 +77,31 @@ export const products = [
             {
                 name: 'заварка',
                 subIngredients: [
-                    { name: 'мука', multiplier: 50, minQuantity: 2 },
-                    { name: 'вода', multiplier: 120, minQuantity: 2 },
+                    { name: 'мука', multiplier: 50, minQuantity: 1 },
+                    { name: 'вода', multiplier: 120, minQuantity: 1 },
                 ]
             },
             {
                 name: 'тесто',
                 subIngredients: [
-                    { name: 'закваска', multiplier: 120, minQuantity: 2 },
-                    { name: 'молоко', multiplier: 90, minQuantity: 2 },
-                    { name: 'заварка', multiplier: 170, minQuantity: 2 },
-                    { name: 'мука', multiplier: 400, minQuantity: 2 },
-                    { name: 'яйцо', multiplier: 1, minQuantity: 2 },
-                    { name: 'сахар', multiplier: 50, minQuantity: 2 },
-                    { name: 'соль', multiplier: 7, minQuantity: 2 },
-                    { name: 'сливочное масло', multiplier: 60, minQuantity: 2 },
+                    { name: 'закваска', multiplier: 120, minQuantity: 1 },
+                    { name: 'молоко', multiplier: 90, minQuantity: 1 },
+                    { name: 'заварка', multiplier: 170, minQuantity: 1 },
+                    { name: 'мука', multiplier: 400, minQuantity: 1 },
+                    { name: 'яйцо', multiplier: 1, minQuantity: 1 },
+                    { name: 'сахар', multiplier: 50, minQuantity: 1 },
+                    { name: 'соль', multiplier: 7, minQuantity: 1 },
+                    { name: 'сливочное масло', multiplier: 60, minQuantity: 1 },
                 ]
             },
             {
                 name: 'крем',
                 subIngredients: [
-                    { name: 'молоко', multiplier: 200, minQuantity: 2 },
-                    { name: 'яйцо', multiplier: 3, minQuantity: 2 },
-                    { name: 'сахар', multiplier: 70, minQuantity: 2 },
-                    { name: 'мука', multiplier: 30, minQuantity: 2 },
-                    { name: 'темный шоколад 54,5%', multiplier: 80, minQuantity: 2 },
+                    { name: 'молоко', multiplier: 200, minQuantity: 1 },
+                    { name: 'яйцо', multiplier: 3, minQuantity: 1 },
+                    { name: 'сахар', multiplier: 70, minQuantity: 1 },
+                    { name: 'мука', multiplier: 30, minQuantity: 1 },
+                    { name: 'темный шоколад 54,5%', multiplier: 80, minQuantity: 1 },
                 ]
             },
         ]
@@ -115,30 +115,30 @@ export const products = [
             {
                 name: 'заварка',
                 subIngredients: [
-                    { name: 'мука', multiplier: 50, minQuantity: 2 },
-                    { name: 'вода', multiplier: 120, minQuantity: 2 },
+                    { name: 'мука', multiplier: 50, minQuantity: 1 },
+                    { name: 'вода', multiplier: 120, minQuantity: 1 },
                 ]
             },
             {
                 name: 'тесто',
                 subIngredients: [
-                    { name: 'закваска', multiplier: 120, minQuantity: 2 },
-                    { name: 'молоко', multiplier: 90, minQuantity: 2 },
-                    { name: 'заварка', multiplier: 170, minQuantity: 2 },
-                    { name: 'мука', multiplier: 400, minQuantity: 2 },
-                    { name: 'яйцо', multiplier: 1, minQuantity: 2 },
-                    { name: 'сахар', multiplier: 50, minQuantity: 2 },
-                    { name: 'соль', multiplier: 7, minQuantity: 2 },
-                    { name: 'сливочное масло', multiplier: 60, minQuantity: 2 },
+                    { name: 'закваска', multiplier: 120, minQuantity: 1 },
+                    { name: 'молоко', multiplier: 90, minQuantity: 1 },
+                    { name: 'заварка', multiplier: 170, minQuantity: 1 },
+                    { name: 'мука', multiplier: 400, minQuantity: 1 },
+                    { name: 'яйцо', multiplier: 1, minQuantity: 1 },
+                    { name: 'сахар', multiplier: 50, minQuantity: 1 },
+                    { name: 'соль', multiplier: 7, minQuantity: 1 },
+                    { name: 'сливочное масло', multiplier: 60, minQuantity: 1 },
                 ]
             },
             {
                 name: 'маковая начинка',
                 subIngredients: [
-                    { name: 'молоко', multiplier: 175, minQuantity: 2 },
-                    { name: 'манка', multiplier: 25, minQuantity: 2 },
-                    { name: 'мак', multiplier: 150, minQuantity: 2 },
-                    { name: 'сахар', multiplier: 70, minQuantity: 2 },
+                    { name: 'молоко', multiplier: 175, minQuantity: 1 },
+                    { name: 'манка', multiplier: 25, minQuantity: 1 },
+                    { name: 'мак', multiplier: 150, minQuantity: 1 },
+                    { name: 'сахар', multiplier: 70, minQuantity: 1 },
                 ]
             },
         ]
@@ -152,21 +152,21 @@ export const products = [
             {
                 name: 'заварка',
                 subIngredients: [
-                    { name: 'мука', multiplier: 50, minQuantity: 2 },
-                    { name: 'вода', multiplier: 120, minQuantity: 2 },
+                    { name: 'мука', multiplier: 50, minQuantity: 1 },
+                    { name: 'вода', multiplier: 120, minQuantity: 1 },
                 ]
             },
             {
                 name: 'тесто',
                 subIngredients: [
-                    { name: 'закваска', multiplier: 120, minQuantity: 2 },
-                    { name: 'молоко', multiplier: 90, minQuantity: 2 },
-                    { name: 'заварка', multiplier: 170, minQuantity: 2 },
-                    { name: 'мука', multiplier: 400, minQuantity: 2 },
-                    { name: 'яйцо', multiplier: 1, minQuantity: 2 },
-                    { name: 'сахар', multiplier: 50, minQuantity: 2 },
-                    { name: 'соль', multiplier: 7, minQuantity: 2 },
-                    { name: 'сливочное масло', multiplier: 60, minQuantity: 2 },
+                    { name: 'закваска', multiplier: 120, minQuantity: 1 },
+                    { name: 'молоко', multiplier: 90, minQuantity: 1 },
+                    { name: 'заварка', multiplier: 170, minQuantity: 1 },
+                    { name: 'мука', multiplier: 400, minQuantity: 1 },
+                    { name: 'яйцо', multiplier: 1, minQuantity: 1 },
+                    { name: 'сахар', multiplier: 50, minQuantity: 1 },
+                    { name: 'соль', multiplier: 7, minQuantity: 1 },
+                    { name: 'сливочное масло', multiplier: 60, minQuantity: 1 },
                 ]
             },
         ]
@@ -175,7 +175,7 @@ export const products = [
         name: 'Cinnabons su citrininiu kremu',
         category: 'Cinnabons',
         price: 8,
-        maxProductQuantity: 2,
+        maxProductQuantity: 4,
         ingredients: [
             {
                 name: 'тесто',
@@ -192,9 +192,9 @@ export const products = [
             {
                 name: 'крем',
                 subIngredients: [
-                    { name: 'кремчиз', multiplier: 200, minQuantity: 2 },
-                    { name: 'сахарная пудра', multiplier: 100, minQuantity: 2 },
-                    { name: 'лимон', multiplier: 1, minQuantity: 2 },
+                    { name: 'кремчиз', multiplier: 200, minQuantity: 1 },
+                    { name: 'сахарная пудра', multiplier: 100, minQuantity: 1 },
+                    { name: 'лимон', multiplier: 1, minQuantity: 1 },
                 ]
             },
             {
@@ -213,16 +213,16 @@ export const products = [
         category: 'Sausainiai',
         price: 7,
         ingredients: [
-            { name: 'масло', multiplier: 90 },
-            { name: 'сахар мусковадо', multiplier: 60 },
-            { name: 'сахар', multiplier: 30 },
-            { name: 'соль', multiplier: 1 },
-            { name: 'яйцо', multiplier: 1 },
-            { name: 'мука', multiplier: 135 },
-            { name: 'какао', multiplier: 25 },
-            { name: 'разрыхлитель', multiplier: 3 },
-            { name: 'темный шоколад 54,5%', multiplier: 120 },
-            { name: 'начинка', multiplier: 4 },
+            { name: 'масло', multiplier: 90, minQuantity: 1 },
+            { name: 'сахар мусковадо', multiplier: 60, minQuantity: 1 },
+            { name: 'сахар', multiplier: 30, minQuantity: 1 },
+            { name: 'соль', multiplier: 1, minQuantity: 1 },
+            { name: 'яйцо', multiplier: 1, minQuantity: 1 },
+            { name: 'мука', multiplier: 135, minQuantity: 1 },
+            { name: 'какао', multiplier: 25, minQuantity: 1 },
+            { name: 'разрыхлитель', multiplier: 3, minQuantity: 1 },
+            { name: 'темный шоколад 54,5%', multiplier: 120, minQuantity: 1 },
+            { name: 'начинка', multiplier: 4, minQuantity: 1 },
         ]
     }
     // Other products...
