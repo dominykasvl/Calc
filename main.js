@@ -76,6 +76,14 @@ document.body.appendChild(document.createElement('hr'));
 const totalIngredientsButton = document.createElement('button');
 totalIngredientsButton.textContent = 'Paskaičiuoti visus ingredientus';
 totalIngredientsButton.classList.add('btn', 'btn-success');
+
+// Assuming totalIngredientsButton is a button element
+totalIngredientsButton.setAttribute('data-bs-toggle', 'popover');
+totalIngredientsButton.setAttribute('data-bs-placement', 'top');
+totalIngredientsButton.setAttribute('data-bs-trigger', 'hover');
+totalIngredientsButton.setAttribute('data-bs-content', 'Pakeitus lenteles, reikia paspausti šį mygtuką, kad atnaujinti visų ingredientų lentelę.');
+totalIngredientsButton.setAttribute('title', 'Pastaba:');
+
 totalIngredientsButton.addEventListener('click', () => {
     const productTables = document.querySelectorAll('#product-tables table');
     if (productTables.length === 0) {
@@ -222,6 +230,12 @@ document.body.appendChild(productTablesDiv);
 
 // Create and add button to generate PDF report from all tables in the page
 createPdfButton();
+
+// Initialize all popovers
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl);
+});
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
