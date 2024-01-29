@@ -73,18 +73,18 @@ document.body.appendChild(buttonRow);
 document.body.appendChild(document.createElement('hr'));
 
 // Button to calculate all ingredients
-const totalIngredientsButton = document.createElement('button');
-totalIngredientsButton.textContent = 'Paskaičiuoti visus ingredientus';
-totalIngredientsButton.classList.add('btn', 'btn-success');
+const allIngredientsButton = document.createElement('button');
+allIngredientsButton.textContent = 'Paskaičiuoti visus ingredientus';
+allIngredientsButton.classList.add('btn', 'btn-success');
 
-// Assuming totalIngredientsButton is a button element
-totalIngredientsButton.setAttribute('data-bs-toggle', 'popover');
-totalIngredientsButton.setAttribute('data-bs-placement', 'top');
-totalIngredientsButton.setAttribute('data-bs-trigger', 'hover');
-totalIngredientsButton.setAttribute('data-bs-content', 'Pakeitus lenteles, reikia paspausti šį mygtuką, kad atnaujinti visų ingredientų lentelę.');
-totalIngredientsButton.setAttribute('title', 'Pastaba:');
+// Assuming allIngredientsButton is a button element
+allIngredientsButton.setAttribute('data-bs-toggle', 'popover');
+allIngredientsButton.setAttribute('data-bs-placement', 'top');
+allIngredientsButton.setAttribute('data-bs-trigger', 'hover');
+allIngredientsButton.setAttribute('data-bs-content', 'Pakeitus lenteles, reikia paspausti šį mygtuką, kad atnaujinti visų ingredientų lentelę.');
+allIngredientsButton.setAttribute('title', 'Pastaba:');
 
-totalIngredientsButton.addEventListener('click', () => {
+allIngredientsButton.addEventListener('click', () => {
     const productTables = document.querySelectorAll('#product-tables table');
     if (productTables.length === 0) {
         alert('Pridėkite bent vieną produktą!');
@@ -163,6 +163,65 @@ totalIngredientsButton.addEventListener('click', () => {
 
     onTableUpdate();
 });
+
+// Button to calculate all ingredients
+const totalIngredientsButton = document.createElement('button');
+totalIngredientsButton.textContent = 'Paskaičiuoti visus ingredientus';
+totalIngredientsButton.classList.add('btn', 'btn-success');
+
+// Assuming totalIngredientsButton is a button element
+totalIngredientsButton.setAttribute('data-bs-toggle', 'popover');
+totalIngredientsButton.setAttribute('data-bs-placement', 'top');
+totalIngredientsButton.setAttribute('data-bs-trigger', 'hover');
+totalIngredientsButton.setAttribute('data-bs-content', 'Pakeitus lenteles, reikia paspausti šį mygtuką, kad atnaujinti visų ingredientų lentelę.');
+totalIngredientsButton.setAttribute('title', 'Pastaba:');
+
+totalIngredientsButton.addEventListener('click', () => {
+    const productTables = document.querySelectorAll('#product-tables table');
+    if (productTables.length === 0) {
+        alert('Pridėkite bent vieną produktą!');
+        return;
+    }
+
+    const ingredientTotals = {};
+    productTables.forEach(table => {
+        const rows = table.querySelectorAll('tr');
+        // Skip the first row (header)
+        for (let i = 2; i < rows.length; i++) {
+            const cells = rows[i].querySelectorAll('td');
+            const ingredientNameHTML = cells[0].innerHTML;
+            // Skip if ingredient is enclosed in <strong>
+            if (ingredientNameHTML.includes('<strong>')) {
+                continue;
+            }
+            const ingredientName = cells[0].textContent.trim();
+            const quantity = Number(cells[1].querySelector('input').value);
+            if (ingredientTotals[ingredientName]) {
+                ingredientTotals[ingredientName] += quantity;
+            } else {
+                ingredientTotals[ingredientName] = quantity;
+            }
+        }
+    });
+
+    const allIngredientsDiv = document.getElementById('all-ingredients');
+    let ingredientTableHTML = '<h3 class="h3">Visų ingredientų lentelė</h3><table class="table table-hover table-bordered"><caption style="display: none;">Visų ingredientų lentelė</caption><tr class="table-dark"><th>Ingredientai</th><th>Iš viso kiekis vnt. / g.</th></tr>';
+    for (const [ingredient, total] of Object.entries(ingredientTotals)) {
+        ingredientTableHTML += `<tr><td>${ingredient}</td><td id="${ingredient}-total">${total}</td></tr>`;
+    }
+    ingredientTableHTML += '</table>';
+
+    if (allIngredientsDiv) {
+        allIngredientsDiv.innerHTML = ingredientTableHTML;
+    } else {
+        const newDiv = document.createElement('div');
+        newDiv.id = 'all-ingredients';
+        newDiv.innerHTML = ingredientTableHTML;
+        document.body.appendChild(newDiv);
+    }
+
+    onTableUpdate();
+});
 //document.body.appendChild(totalIngredientsButton);
 
 //Create button to delete all product tables in the page and clear sessionStorage
@@ -220,6 +279,7 @@ editPricesButton.dataset.bsToggle = 'modal';
 editPricesButton.dataset.bsTarget = '#priceModal';
 
 innerDiv.appendChild(deleteAllIngredientsButton);
+//innerDiv.appendChild(allIngredientsButton);
 innerDiv.appendChild(totalIngredientsButton);
 innerDiv.appendChild(editPricesButton);
 innerDiv.appendChild(pdfButton);
