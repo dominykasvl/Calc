@@ -69,6 +69,19 @@ export const products = [
         ]
     },
     {
+        name: 'Pilno grūdo Duona',
+        category: 'Duona',
+        price: 7,
+        maxProductQuantity: 2,
+        ingredients: [
+            { name: 'мука', multiplier: 617, minQuantity: 1 },
+            { name: 'ц3 мука', multiplier: 100, minQuantity: 1 },
+            { name: 'закваска', multiplier: 290, minQuantity: 1 },
+            { name: 'вода', multiplier: 450, minQuantity: 1 },
+            { name: 'соль', multiplier: 17, minQuantity: 1 }
+        ]
+    },
+    {
         name: 'Babka su šokoladiniu kremu',
         category: 'Babka',
         price: 16,
