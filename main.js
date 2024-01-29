@@ -113,42 +113,94 @@ totalIngredientsButton.addEventListener('click', () => {
     });
 
     const allIngredientsDiv = document.getElementById('all-ingredients');
-    let ingredientTableHTML = '<h3 class="h3">Visų ingredientų lentelė</h3><table class="table table-hover table-bordered"><caption style="display: none;">Visų ingredientų lentelė</caption><tr class="table-dark"><th>Ingredientai</th><th>Iš viso kiekis vnt. / g.</th></tr>';
-    for (const [ingredient, total] of Object.entries(ingredientTotals)) {
-        ingredientTableHTML += `<tr><td>${ingredient}</td><td id="${ingredient}-total">${total}</td></tr>`;
-    }
-    ingredientTableHTML += '</table>';
+    if (allIngredientsDiv.innerHTML.trim() !== '') {
+        // Update existing table
+        const oldTable = allIngredientsDiv.querySelector('table');
+        const newTable = oldTable.cloneNode(true);
+        for (const [ingredient, total] of Object.entries(ingredientTotals)) {
+            const ingredientId = ingredient.replace(/\s+/g, '-').replace(/[,%]/g, '');
+            let row = newTable.querySelector(`#${ingredientId}-total`);
+            if (row) {
+                // Update existing row
+                row.textContent = total;
+            } else {
+                // Add new row
+                const tr = document.createElement('tr');
+                const td1 = document.createElement('td');
+                td1.textContent = ingredient;
+                const td2 = document.createElement('td');
+                td2.id = `${ingredientId}-total`;
+                td2.textContent = total;
+                tr.appendChild(td1);
+                tr.appendChild(td2);
 
-    if (allIngredientsDiv) {
-        allIngredientsDiv.innerHTML = ingredientTableHTML;
+                // Get the tbody element, or create one if it doesn't exist
+                let tbody = newTable.querySelector('tbody');
+                if (!tbody) {
+                    tbody = document.createElement('tbody');
+                    newTable.appendChild(tbody);
+                }
+
+                // Add the new row to the tbody element
+                tbody.appendChild(tr);
+            }
+        }
+        // Force reflow
+        newTable.offsetHeight;
+
+        oldTable.parentNode.replaceChild(newTable, oldTable);
+
     } else {
-        const newDiv = document.createElement('div');
-        newDiv.id = 'all-ingredients';
-        newDiv.innerHTML = ingredientTableHTML;
-        document.body.appendChild(newDiv);
+        // Create new table
+        let ingredientTableHTML = '<h3 class="h3">Visų ingredientų lentelė</h3><table class="table table-hover table-bordered"><caption style="display: none;">Visų ingredientų lentelė</caption><tr class="table-dark"><th>Ingredientai</th><th>Iš viso kiekis vnt. / g.</th></tr>';
+        for (const [ingredient, total] of Object.entries(ingredientTotals)) {
+            const ingredientId = ingredient.replace(/\s+/g, '-').replace(/[,%]/g, '');
+            ingredientTableHTML += `<tr><td>${ingredient}</td><td id="${ingredientId}-total">${total}</td></tr>`;
+        }
+        ingredientTableHTML += '</table>';
+        allIngredientsDiv.innerHTML = ingredientTableHTML;
     }
 
     onTableUpdate();
 });
 //document.body.appendChild(totalIngredientsButton);
 
-//Create button to delete all tables in the page and clear sessionStorage
+//Create button to delete all product tables in the page and clear sessionStorage
 const deleteAllTablesButton = document.createElement('button');
-deleteAllTablesButton.textContent = 'Ištrinti visas lenteles';
+deleteAllTablesButton.textContent = 'Ištrinti visas produktų lenteles';
 deleteAllTablesButton.classList.add('btn', 'btn-danger');
 deleteAllTablesButton.addEventListener('click', () => {
-    const confirmDelete = confirm('Ar norite ištrinti visas lenteles?');
+    const confirmDelete = confirm('Ar norite ištrinti visas produktų lenteles?');
     if (confirmDelete) {
         const productTablesDiv = document.getElementById('product-tables');
         productTablesDiv.innerHTML = '';
-
-        const allIngredientsDiv = document.getElementById('all-ingredients');
-        allIngredientsDiv.innerHTML = '';
 
         sessionStorage.clear();
     }
 });
 //document.body.appendChild(deleteAllTablesButton);
+
+//Create button to delete all ingredients table in the page and clear from localStorage
+const deleteAllIngredientsButton = document.createElement('button');
+deleteAllIngredientsButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+</svg>`;
+deleteAllIngredientsButton.setAttribute('data-bs-toggle', 'popover');
+deleteAllIngredientsButton.setAttribute('data-bs-placement', 'top');
+deleteAllIngredientsButton.setAttribute('data-bs-trigger', 'hover');
+deleteAllIngredientsButton.setAttribute('data-bs-content', 'Bus ištrinta visų ingredientų lentelė.');
+deleteAllIngredientsButton.setAttribute('title', 'Pastaba:');
+deleteAllIngredientsButton.classList.add('btn', 'btn-secondary');
+deleteAllIngredientsButton.addEventListener('click', () => {
+    const confirmDelete = confirm('Ar norite ištrinti ingredientų lentelę?');
+    if (confirmDelete) {
+        const allIngredientsDiv = document.getElementById('all-ingredients');
+        allIngredientsDiv.innerHTML = '';
+
+        localStorage.removeItem('allIngredientsTable');
+    }
+});
 
 const outerDiv = document.createElement('div');
 outerDiv.classList.add('d-flex', 'justify-content-center');
@@ -167,6 +219,7 @@ editPricesButton.classList.add('btn', 'btn-warning');
 editPricesButton.dataset.bsToggle = 'modal';
 editPricesButton.dataset.bsTarget = '#priceModal';
 
+innerDiv.appendChild(deleteAllIngredientsButton);
 innerDiv.appendChild(totalIngredientsButton);
 innerDiv.appendChild(editPricesButton);
 innerDiv.appendChild(pdfButton);
@@ -239,12 +292,12 @@ createPdfButton();
 // Initialize all popovers
 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-  return new bootstrap.Popover(popoverTriggerEl);
+    return new bootstrap.Popover(popoverTriggerEl);
 });
 
 // Initialize listeners for price change
 document.querySelectorAll('.savedPrice').forEach(input => {
-    const handleChange = function() {
+    const handleChange = function () {
         // Create alert
         const alert = document.createElement('div');
         alert.className = 'alert alert-warning position-fixed top-0 end-0 alert-dismissible fade show';
@@ -281,7 +334,7 @@ window.onload = function () {
     var allIngredientsDiv = document.getElementById('all-ingredients');
     var productTablesDiv = document.getElementById('product-tables');
 
-    var savedAllIngredientsTable = sessionStorage.getItem('allIngredientsTable');
+    var savedAllIngredientsTable = localStorage.getItem('allIngredientsTable');
     var savedProductTables = sessionStorage.getItem('productTables');
 
     if (savedAllIngredientsTable) {
@@ -336,7 +389,7 @@ function onTableUpdate() {
     var allIngredientsDiv = document.getElementById('all-ingredients');
     var productTablesDiv = document.getElementById('product-tables');
 
-    sessionStorage.setItem('allIngredientsTable', allIngredientsDiv.innerHTML);
+    localStorage.setItem('allIngredientsTable', allIngredientsDiv.innerHTML);
     sessionStorage.setItem('productTables', productTablesDiv.innerHTML);
 }
 
