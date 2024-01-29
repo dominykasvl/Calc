@@ -234,6 +234,9 @@ deleteAllTablesButton.addEventListener('click', () => {
         const productTablesDiv = document.getElementById('product-tables');
         productTablesDiv.innerHTML = '';
 
+        const allIngredientsDiv = document.getElementById('all-ingredients');
+        allIngredientsDiv.innerHTML = '';
+
         sessionStorage.clear();
     }
 });
@@ -278,7 +281,7 @@ editPricesButton.classList.add('btn', 'btn-warning');
 editPricesButton.dataset.bsToggle = 'modal';
 editPricesButton.dataset.bsTarget = '#priceModal';
 
-innerDiv.appendChild(deleteAllIngredientsButton);
+//innerDiv.appendChild(deleteAllIngredientsButton);
 //innerDiv.appendChild(allIngredientsButton);
 innerDiv.appendChild(totalIngredientsButton);
 innerDiv.appendChild(editPricesButton);
@@ -394,7 +397,7 @@ window.onload = function () {
     var allIngredientsDiv = document.getElementById('all-ingredients');
     var productTablesDiv = document.getElementById('product-tables');
 
-    var savedAllIngredientsTable = localStorage.getItem('allIngredientsTable');
+    var savedAllIngredientsTable = sessionStorage.getItem('allIngredientsTable');
     var savedProductTables = sessionStorage.getItem('productTables');
 
     if (savedAllIngredientsTable) {
@@ -449,7 +452,7 @@ function onTableUpdate() {
     var allIngredientsDiv = document.getElementById('all-ingredients');
     var productTablesDiv = document.getElementById('product-tables');
 
-    localStorage.setItem('allIngredientsTable', allIngredientsDiv.innerHTML);
+    sessionStorage.setItem('allIngredientsTable', allIngredientsDiv.innerHTML);
     sessionStorage.setItem('productTables', productTablesDiv.innerHTML);
 }
 
