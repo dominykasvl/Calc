@@ -86,6 +86,7 @@ allIngredientsButton.setAttribute('data-bs-content', 'Pakeitus lenteles, reikia 
 allIngredientsButton.setAttribute('title', 'Pastaba:');
 
 const addToSummaryButton = document.createElement('button');
+addToSummaryButton.id = 'add-to-summary-button';
 addToSummaryButton.textContent = '+';
 addToSummaryButton.classList.add('btn', 'btn-secondary');
 
@@ -98,7 +99,21 @@ addToSummaryButton.setAttribute('title', 'Pridėti esamus produktų lentelių in
 addToSummaryButton.addEventListener('click', () => {
     const productTables = document.querySelectorAll('#product-tables table');
     if (productTables.length === 0) {
-        alert('Nėra produktų!');
+        // Create alert
+        const alert = document.createElement('div');
+        alert.className = 'alert alert-danger position-fixed top-0 end-0 alert-dismissible fade show';
+        alert.style.zIndex = 9999; // Ensure the alert is above all other elements
+        alert.innerHTML = '<button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Nėra produktų!</strong>';
+    
+        // Append alert to body
+        document.body.appendChild(alert);
+    
+        // Remove alert after 3 seconds
+        setTimeout(() => {
+            document.querySelectorAll('.alert').forEach(alert => {
+                alert.querySelector('.btn-close').click();
+            });
+        }, 3000);
         return;
     }
 
@@ -183,6 +198,22 @@ addToSummaryButton.addEventListener('click', () => {
         const summaryDiv = document.getElementById('ingredients-summary');
         summaryDiv.innerHTML = ingredientTableHTML;
     }
+
+    // Create alert
+    alert = document.createElement('div');
+    alert.className = 'alert alert-warning position-fixed top-0 end-0 alert-dismissible fade show';
+    alert.style.zIndex = 9999; // Ensure the alert is above all other elements
+    alert.innerHTML = '<button type="button" class="btn-close" data-bs-dismiss="alert"></button><strong>Ingredientai pridėti į suvestinę!</strong>';
+
+    // Append alert to body
+    document.body.appendChild(alert);
+
+    // Remove alert after 3 seconds
+    setTimeout(() => {
+        document.querySelectorAll('.alert').forEach(alert => {
+            alert.querySelector('.btn-close').click();
+        });
+    }, 3000);
 });
 
 // Button to calculate all ingredients
