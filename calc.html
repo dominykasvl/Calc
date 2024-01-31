@@ -41,6 +41,28 @@
         </div>
     </div>
 
+    <div class="modal fade left" id="summaryModal" tabindex="-1" role="dialog" aria-labelledby="summaryModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+    
+          <div class="modal-header">
+            <h5 class="modal-title" id="summaryModalLabel">Visų ingredientų suvestinė</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+    
+          <div id="ingredients-summary" class="modal-body">
+            Tuščia.
+          </div>
+
+          <div class="modal-footer fw-bold">
+            <button id="generate-summary">Atspausdinti suvestinę</button>
+            <button id="deleteSummaries" class="btn btn-danger">Ištrinti suvestinę</button>
+          </div>
+          
+        </div>
+      </div>
+  </div>
+
     <script src="/Calc/plugins/jspdf.umd.min.js"></script>
     <script src="/Calc/plugins/jspdf.plugin.autotable.js"></script>
     <script type="module" src="./main.js"></script>

@@ -1,6 +1,7 @@
 import { products } from '/Calc/modules/productData.js';
 import { generateProductIngredientsHTML, generateProductPriceList } from '/Calc/modules/htmlGenerator.js';
 import { createPdfButton } from '/Calc/modules/pdfReport.js';
+import { createSumarryReportButton } from '/Calc/modules/summaryReport.js';
 
 // Generate the HTML for all products and add it to the page
 let tableCounter = 0;
@@ -84,10 +85,20 @@ allIngredientsButton.setAttribute('data-bs-trigger', 'hover');
 allIngredientsButton.setAttribute('data-bs-content', 'Pakeitus lenteles, reikia paspausti šį mygtuką, kad atnaujinti visų ingredientų lentelę.');
 allIngredientsButton.setAttribute('title', 'Pastaba:');
 
-allIngredientsButton.addEventListener('click', () => {
+const addToSummaryButton = document.createElement('button');
+addToSummaryButton.textContent = '+';
+addToSummaryButton.classList.add('btn', 'btn-secondary');
+
+// Assuming addToSummaryButton is a button element
+addToSummaryButton.setAttribute('data-bs-toggle', 'popover');
+addToSummaryButton.setAttribute('data-bs-placement', 'top');
+addToSummaryButton.setAttribute('data-bs-trigger', 'hover');
+addToSummaryButton.setAttribute('data-bs-content', 'Pastaba: Į suvestinę bus pridėtos naujos reikšmės nepriklausomai ar jau buvo ar ne. Spauskite po pilno užsakymo dienai suformavimo.');
+addToSummaryButton.setAttribute('title', 'Pridėti esamus produktų lentelių ingredientus į bendrą suvestinę');
+addToSummaryButton.addEventListener('click', () => {
     const productTables = document.querySelectorAll('#product-tables table');
     if (productTables.length === 0) {
-        alert('Pridėkite bent vieną produktą!');
+        alert('Nėra produktų!');
         return;
     }
 
@@ -112,8 +123,10 @@ allIngredientsButton.addEventListener('click', () => {
         }
     });
 
-    const allIngredientsDiv = document.getElementById('all-ingredients');
-    if (allIngredientsDiv.innerHTML.trim() !== '') {
+    const date = new Date(document.getElementById('pdf-time').value);
+
+    const allIngredientsDiv = document.getElementById('ingredients-summary');
+    if (allIngredientsDiv.innerHTML.trim() !== '' && allIngredientsDiv.innerHTML.trim() !== "Tuščia.") {
         // Update existing table
         const oldTable = allIngredientsDiv.querySelector('table');
         const newTable = oldTable.cloneNode(true);
@@ -122,7 +135,7 @@ allIngredientsButton.addEventListener('click', () => {
             let row = newTable.querySelector(`#${ingredientId}-total`);
             if (row) {
                 // Update existing row
-                row.textContent = total;
+                row.textContent = parseFloat(row.textContent) + total;
             } else {
                 // Add new row
                 const tr = document.createElement('tr');
@@ -145,28 +158,36 @@ allIngredientsButton.addEventListener('click', () => {
                 tbody.appendChild(tr);
             }
         }
-        // Force reflow
-        newTable.offsetHeight;
+        // Get the existing dates from the data attribute, or create a new array if it doesn't exist
+        const dates = oldTable.dataset.dates ? JSON.parse(oldTable.dataset.dates) : [];
+        // Add the new date to the array
+        dates.push(date.getTime());
+        // Update the data attribute with the new array
+        newTable.dataset.dates = JSON.stringify(dates);
 
-        oldTable.parentNode.replaceChild(newTable, oldTable);
+        sessionStorage.setItem('summaryIngredients', newTable.outerHTML);
+
+        const summaryDiv = document.getElementById('ingredients-summary');
+        summaryDiv.innerHTML = newTable.outerHTML;
 
     } else {
         // Create new table
-        let ingredientTableHTML = '<h3 class="h3">Visų ingredientų lentelė</h3><table class="table table-hover table-bordered"><caption style="display: none;">Visų ingredientų lentelė</caption><tr class="table-dark"><th>Ingredientai</th><th>Iš viso kiekis vnt. / g.</th></tr>';
+        let ingredientTableHTML = `<table id="summary-table" class="table table-hover table-bordered" data-dates='["${date.getTime()}"]'><caption style="display: none;">Visų ingredientų suvestinė</caption><tr class="table-dark"><th>Ingredientai</th><th>Iš viso kiekis vnt. / g.</th></tr>`;
         for (const [ingredient, total] of Object.entries(ingredientTotals)) {
             const ingredientId = ingredient.replace(/\s+/g, '-').replace(/[,%]/g, '');
             ingredientTableHTML += `<tr><td>${ingredient}</td><td id="${ingredientId}-total">${total}</td></tr>`;
         }
         ingredientTableHTML += '</table>';
-        allIngredientsDiv.innerHTML = ingredientTableHTML;
-    }
+        sessionStorage.setItem('summaryIngredients', ingredientTableHTML);
 
-    onTableUpdate();
+        const summaryDiv = document.getElementById('ingredients-summary');
+        summaryDiv.innerHTML = ingredientTableHTML;
+    }
 });
 
 // Button to calculate all ingredients
 const totalIngredientsButton = document.createElement('button');
-totalIngredientsButton.textContent = 'Paskaičiuoti visus ingredientus';
+totalIngredientsButton.textContent = 'Paskaičiuoti ingredientus';
 totalIngredientsButton.classList.add('btn', 'btn-success');
 
 // Assuming totalIngredientsButton is a button element
@@ -237,10 +258,23 @@ deleteAllTablesButton.addEventListener('click', () => {
         const allIngredientsDiv = document.getElementById('all-ingredients');
         allIngredientsDiv.innerHTML = '';
 
+        const summaryIngredients = sessionStorage.getItem('summaryIngredients');
         sessionStorage.clear();
+        sessionStorage.setItem('summaryIngredients', summaryIngredients);
     }
 });
 //document.body.appendChild(deleteAllTablesButton);
+
+const deleteSummary = document.getElementById('deleteSummaries');
+deleteSummary.addEventListener('click', () => {
+    const confirmDelete = confirm('Ar norite ištrinti suvestinę?');
+    if (confirmDelete) {
+        const productTablesDiv = document.getElementById('ingredients-summary');
+        productTablesDiv.innerHTML = 'Tuščia.';
+
+        sessionStorage.setItem('summaryIngredients', '');
+    }
+});
 
 //Create button to delete all ingredients table in the page and clear from localStorage
 const deleteAllIngredientsButton = document.createElement('button');
@@ -272,7 +306,7 @@ innerDiv.classList.add('btn-group');
 innerDiv.setAttribute('role', 'group');
 
 const pdfButton = document.createElement('button');
-pdfButton.textContent = 'Generuoti PDF';
+pdfButton.textContent = 'Generuoti ataskaitą';
 pdfButton.id = 'generate-pdf';
 
 const editPricesButton = document.createElement('button');
@@ -281,8 +315,16 @@ editPricesButton.classList.add('btn', 'btn-warning');
 editPricesButton.dataset.bsToggle = 'modal';
 editPricesButton.dataset.bsTarget = '#priceModal';
 
+const showSummaryButton = document.createElement('button');
+showSummaryButton.textContent = 'Suvestinė';
+showSummaryButton.classList.add('btn', 'btn-secondary');
+showSummaryButton.dataset.bsToggle = 'modal';
+showSummaryButton.dataset.bsTarget = '#summaryModal';
+
 //innerDiv.appendChild(deleteAllIngredientsButton);
 //innerDiv.appendChild(allIngredientsButton);
+innerDiv.appendChild(showSummaryButton);
+innerDiv.appendChild(addToSummaryButton);
 innerDiv.appendChild(totalIngredientsButton);
 innerDiv.appendChild(editPricesButton);
 innerDiv.appendChild(pdfButton);
@@ -352,6 +394,9 @@ document.body.appendChild(productTablesDiv);
 // Create and add button to generate PDF report from all tables in the page
 createPdfButton();
 
+// Create and add button to generate summary PDF report
+createSumarryReportButton();
+
 // Initialize all popovers
 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
@@ -396,9 +441,11 @@ if ('serviceWorker' in navigator) {
 window.onload = function () {
     var allIngredientsDiv = document.getElementById('all-ingredients');
     var productTablesDiv = document.getElementById('product-tables');
+    var summaryDiv = document.getElementById('ingredients-summary');
 
     var savedAllIngredientsTable = sessionStorage.getItem('allIngredientsTable');
     var savedProductTables = sessionStorage.getItem('productTables');
+    var savedSummary = sessionStorage.getItem('summaryIngredients');
 
     if (savedAllIngredientsTable) {
         allIngredientsDiv.innerHTML = savedAllIngredientsTable;
@@ -406,6 +453,10 @@ window.onload = function () {
 
     if (savedProductTables) {
         productTablesDiv.innerHTML = savedProductTables;
+    }
+
+    if (savedSummary && savedSummary !== '') {
+        summaryDiv.innerHTML = savedSummary;
     }
 
     var inputs = document.getElementsByTagName('input');
