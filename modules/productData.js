@@ -205,8 +205,8 @@ export const products = [
             {
                 name: 'крем',
                 subIngredients: [
-                    { name: 'кремчиз', multiplier: 200, minQuantity: 1 },
-                    { name: 'сахарная пудра', multiplier: 100, minQuantity: 1 },
+                    { name: 'кремчиз', multiplier: 100, minQuantity: 1, alternateCounting: true },
+                    { name: 'сахарная пудра', multiplier: 50, minQuantity: 1, alternateCounting: true },
                     { name: 'лимон', multiplier: 1, minQuantity: 1 },
                 ]
             },

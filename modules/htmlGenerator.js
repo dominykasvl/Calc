@@ -142,6 +142,8 @@ function generateSubIngredientHTML(subIngredient, ingredient, product, tableCoun
     let multiplier;
     if (localTableCounter === 0 && subIngredient.minQuantity && subIngredient.minQuantity >= quantity) { // Modify this line
         multiplier = subIngredient.multiplier;
+    } else if (subIngredient.alternateCounting) {
+        multiplier = subIngredient.multiplier  * quantity;
     } else {
         multiplier = (subIngredient.multiplier / subIngredient.minQuantity) * quantity;
     }
