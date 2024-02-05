@@ -54,7 +54,7 @@ export function createPdfButton() {
         const textX = pageWidth - textWidth - 5; // Adjust the position as needed
         doc.text(text, textX, 7);
 
-        const reportTables = document.querySelectorAll('table');
+        const reportTables = Array.from(document.querySelectorAll('table')).filter(table => table.id !== 'summary-table');
         let startY = 10; // Initial Y position
         reportTables.forEach(function (table, index) {
             const captionElement = table.querySelector('caption');

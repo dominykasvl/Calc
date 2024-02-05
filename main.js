@@ -218,7 +218,7 @@ addToSummaryButton.addEventListener('click', () => {
 
 // Button to calculate all ingredients
 const totalIngredientsButton = document.createElement('button');
-totalIngredientsButton.textContent = 'Paskaičiuoti ingredientus';
+totalIngredientsButton.textContent = 'Paskaičiuoti ingredientus nurodytai dienai';
 totalIngredientsButton.classList.add('btn', 'btn-success');
 
 // Assuming totalIngredientsButton is a button element
@@ -257,7 +257,7 @@ totalIngredientsButton.addEventListener('click', () => {
     });
 
     const allIngredientsDiv = document.getElementById('all-ingredients');
-    let ingredientTableHTML = '<h3 class="h3">Visų ingredientų lentelė</h3><table class="table table-hover table-bordered"><caption style="display: none;">Visų ingredientų lentelė</caption><tr class="table-dark"><th>Ingredientai</th><th>Iš viso kiekis vnt. / g.</th></tr>';
+    let ingredientTableHTML = '<h3 class="h3">Visų ingredientų lentelė</h3><table class="table table-hover table-bordered"><caption style="display: none;">Visi ingredientai šiai dienai</caption><tr class="table-dark"><th>Ingredientai</th><th>Iš viso kiekis vnt. / g.</th></tr>';
     for (const [ingredient, total] of Object.entries(ingredientTotals)) {
         ingredientTableHTML += `<tr><td>${ingredient}</td><td id="${ingredient}-total">${total}</td></tr>`;
     }
