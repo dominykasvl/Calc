@@ -75,7 +75,7 @@ export const products = [
         maxProductQuantity: 2,
         ingredients: [
             { name: 'мука', multiplier: 335, minQuantity: 1 },
-            { name: 'ц3 мука', multiplier: 100, minQuantity: 1 },
+            { name: 'ц3 мука', multiplier: 50, minQuantity: 1 },
             { name: 'закваска', multiplier: 85, minQuantity: 1 },
             { name: 'вода', multiplier: 230, minQuantity: 1 },
             { name: 'соль', multiplier: 8.5, minQuantity: 1 }
