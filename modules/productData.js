@@ -82,6 +82,34 @@ export const products = [
         ]
     },
     {
+        name: 'Challah Duona',
+        category: 'Duona',
+        price: 8,
+        maxProductQuantity: 4,
+        ingredients: [
+            {
+                name: 'заварка',
+                subIngredients: [
+                    { name: 'мука', multiplier: 25, minQuantity: 1 },
+                    { name: 'вода', multiplier: 60, minQuantity: 1 },
+                ]
+            },
+            {
+                name: 'тесто',
+                subIngredients: [
+                    { name: 'закваска', multiplier: 60, minQuantity: 1 },
+                    { name: 'молоко', multiplier: 45, minQuantity: 1 },
+                    { name: 'заварка', multiplier: 85, minQuantity: 1 },
+                    { name: 'мука', multiplier: 175, minQuantity: 1 },
+                    { name: 'яйцо', multiplier: 1, minQuantity: 1 },
+                    { name: 'сахар', multiplier: 25, minQuantity: 1 },
+                    { name: 'соль', multiplier: 4, minQuantity: 1 },
+                    { name: 'сливочное масло', multiplier: 30, minQuantity: 1 },
+                ]
+            },
+        ]
+    },
+    {
         name: 'Babka su šokoladiniu kremu',
         category: 'Babka',
         price: 16,
@@ -175,7 +203,7 @@ export const products = [
                     { name: 'закваска', multiplier: 120, minQuantity: 1 },
                     { name: 'молоко', multiplier: 90, minQuantity: 1 },
                     { name: 'заварка', multiplier: 170, minQuantity: 1 },
-                    { name: 'мука', multiplier: 400, minQuantity: 1 },
+                    { name: 'мука', multiplier: 350, minQuantity: 1 },
                     { name: 'яйцо', multiplier: 1, minQuantity: 1 },
                     { name: 'сахар', multiplier: 50, minQuantity: 1 },
                     { name: 'соль', multiplier: 7, minQuantity: 1 },
@@ -237,6 +265,50 @@ export const products = [
             { name: 'темный шоколад 54,5%', multiplier: 120, minQuantity: 1 },
             { name: 'начинка', multiplier: 4, minQuantity: 1 },
         ]
-    }
+    },
+    {
+        name: 'Bandelės su kardamonu',
+        category: 'Bandelė',
+        price: 8,
+        maxProductQuantity: 4,
+        ingredients: [
+            {
+                name: 'заварка',
+                subIngredients: [
+                    { name: 'мука', multiplier: 25, minQuantity: 2 },
+                    { name: 'вода', multiplier: 60, minQuantity: 2 },
+                ]
+            },
+            {
+                name: 'тесто',
+                subIngredients: [
+                    { name: 'закваска', multiplier: 60, minQuantity: 2 },
+                    { name: 'молоко', multiplier: 45, minQuantity: 2 },
+                    { name: 'заварка', multiplier: 85, minQuantity: 2 },
+                    { name: 'мука', multiplier: 175, minQuantity: 2 },
+                    { name: 'яйцо', multiplier: 1, minQuantity: 2 },
+                    { name: 'сахар', multiplier: 25, minQuantity: 2 },
+                    { name: 'соль', multiplier: 4, minQuantity: 2 },
+                    { name: 'сливочное масло', multiplier: 30, minQuantity: 2 },
+                ]
+            },
+            {
+                name: 'начинка',
+                subIngredients: [
+                    { name: 'сахар', multiplier: 50, minQuantity: 2 },
+                    { name: 'масло', multiplier: 40, minQuantity: 2 },
+                    { name: 'кардамон', multiplier: 2, minQuantity: 2 },
+                ]
+            },
+            {
+                name: 'сироп',
+                subIngredients: [
+                    { name: 'сахар', multiplier: 50, minQuantity: 2 },
+                    { name: 'вода', multiplier: 50, minQuantity: 2 },
+                    { name: 'кардамон', multiplier: 1, minQuantity: 2 },
+                ]
+            },
+        ]
+    },
     // Other products...
 ];
