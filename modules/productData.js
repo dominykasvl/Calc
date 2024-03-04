@@ -6,9 +6,9 @@ export const products = [
         price: 7,
         maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 385, minQuantity: 1 },
+            { name: 'мука', multiplier: 400, minQuantity: 1 },
             { name: 'закваска', multiplier: 85, minQuantity: 1 },
-            { name: 'вода', multiplier: 230, minQuantity: 1 },
+            { name: 'вода', multiplier: 240, minQuantity: 1 },
             { name: 'соль', multiplier: 8.5, minQuantity: 1 }
         ]
     },
@@ -18,9 +18,9 @@ export const products = [
         price: 8,
         maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 380, minQuantity: 1 },
+            { name: 'мука', multiplier: 400, minQuantity: 1 },
             { name: 'закваска', multiplier: 85, minQuantity: 1 },
-            { name: 'вода', multiplier: 230, minQuantity: 1 },
+            { name: 'вода', multiplier: 240, minQuantity: 1 },
             { name: 'соль', multiplier: 8.5, minQuantity: 1 },
             { name: 'семена', multiplier: 30, minQuantity: 1 }
         ]
@@ -31,9 +31,9 @@ export const products = [
         price: 8,
         maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 375, minQuantity: 1 },
+            { name: 'мука', multiplier: 400, minQuantity: 1 },
             { name: 'закваска', multiplier: 80, minQuantity: 1 },
-            { name: 'вода', multiplier: 225, minQuantity: 1 },
+            { name: 'вода', multiplier: 240, minQuantity: 1 },
             { name: 'сахар', multiplier: 30, minQuantity: 1 },
             { name: 'соль', multiplier: 7, minQuantity: 1 },
             { name: 'масло', multiplier: 20, minQuantity: 1 }
@@ -45,9 +45,9 @@ export const products = [
         price: 9,
         maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 380, minQuantity: 1 },
+            { name: 'мука', multiplier: 400, minQuantity: 1 },
             { name: 'закваска', multiplier: 85, minQuantity: 1 },
-            { name: 'вода', multiplier: 130, minQuantity: 1 },
+            { name: 'вода', multiplier: 240, minQuantity: 1 },
             { name: 'томатный сок', multiplier: 100, minQuantity: 1 },
             { name: 'соль', multiplier: 7, minQuantity: 1 },
             { name: 'чеддер', multiplier: 60, minQuantity: 1 }
@@ -59,9 +59,9 @@ export const products = [
         price: 8,
         maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 380, minQuantity: 1 },
+            { name: 'мука', multiplier: 400, minQuantity: 1 },
             { name: 'закваска', multiplier: 85, minQuantity: 1 },
-            { name: 'вода', multiplier: 230, minQuantity: 1 },
+            { name: 'вода', multiplier: 240, minQuantity: 1 },
             { name: 'соль', multiplier: 8.5, minQuantity: 1 },
             { name: 'солод', multiplier: 10, minQuantity: 1 },
             { name: 'лук', multiplier: 50, minQuantity: 1 },
@@ -74,10 +74,10 @@ export const products = [
         price: 7,
         maxProductQuantity: 2,
         ingredients: [
-            { name: 'мука', multiplier: 335, minQuantity: 1 },
+            { name: 'мука', multiplier: 400, minQuantity: 1 },
             { name: 'ц3 мука', multiplier: 50, minQuantity: 1 },
             { name: 'закваска', multiplier: 85, minQuantity: 1 },
-            { name: 'вода', multiplier: 230, minQuantity: 1 },
+            { name: 'вода', multiplier: 240, minQuantity: 1 },
             { name: 'соль', multiplier: 8.5, minQuantity: 1 }
         ]
     },
