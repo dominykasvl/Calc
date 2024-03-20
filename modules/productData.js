@@ -273,23 +273,15 @@ export const products = [
         maxProductQuantity: 4,
         ingredients: [
             {
-                name: 'заварка',
-                subIngredients: [
-                    { name: 'мука', multiplier: 25, minQuantity: 2 },
-                    { name: 'вода', multiplier: 60, minQuantity: 2 },
-                ]
-            },
-            {
                 name: 'тесто',
                 subIngredients: [
-                    { name: 'закваска', multiplier: 60, minQuantity: 2 },
-                    { name: 'молоко', multiplier: 45, minQuantity: 2 },
-                    { name: 'заварка', multiplier: 85, minQuantity: 2 },
-                    { name: 'мука', multiplier: 175, minQuantity: 2 },
-                    { name: 'яйцо', multiplier: 1, minQuantity: 2 },
-                    { name: 'сахар', multiplier: 25, minQuantity: 2 },
-                    { name: 'соль', multiplier: 4, minQuantity: 2 },
-                    { name: 'сливочное масло', multiplier: 30, minQuantity: 2 },
+                    { name: 'мука', multiplier: 250, minQuantity: 2 },
+                    { name: 'молоко', multiplier: 80, minQuantity: 2 },
+                    { name: 'дрожжи', multiplier: 6, minQuantity: 2 },
+                    { name: 'яйцо', multiplier: 1.5, minQuantity: 2 },
+                    { name: 'сахар', multiplier: 55, minQuantity: 2 },
+                    { name: 'масло', multiplier: 30, minQuantity: 2 },
+                    { name: 'соль', multiplier: 2.5, minQuantity: 2 },
                 ]
             },
             {
